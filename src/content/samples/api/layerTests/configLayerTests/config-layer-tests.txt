@@ -1,0 +1,162 @@
+SETUP
+    // JSON snippet to be added as a ConfigLayer
+    const layerJSON = {
+            "id": "0",
+            "name": "Liquids Pipeline",
+            "layerType": "esriFeature",
+            "state": {
+            "visibility": true
+            },
+            "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/3"
+        };
+
+    // add layer to map
+    RZ.mapById('mobile-map').layers.addLayer(layerJSON);
+
+    // set the config layer to a constant for ease of use
+    const configLayer = RZ.mapById('mobile-map').layers.getLayersById('0')[0];
+
+//CHANGE NAME
+    // subscribe to name changed
+    configLayer.nameChanged.subscribe(l => console.log('Name changed'));
+
+    // check current name is correct
+    configLayer.name === 'Liquids Pipeline';
+
+    // change name
+    configLayer.name = 'new Name';
+
+    // expect 'Name changed' to appear in the console
+
+    // check name changed
+    configLayer.name === 'new Name';
+
+CHANGE OPACITY
+    // subscribe to opacity changed
+    configLayer.opacityChanged.subscribe(l => console.log('Opacity changed'));
+
+    // check current opacity is correct
+    configLayer.opacity === 1;
+
+    // change opacity
+    configLayer.opacity = 0.3;
+
+    // expect 'Opacity changed' to appear in the console
+
+    // check opacity changed
+    configLayer.opacity === 0.3;
+
+CHANGE VISIBILITY
+    // subscribe to visibiilty changed
+    configLayer.visibilityChanged.subscribe(l => console.log('Visibility changed'));
+
+    // check current visibility is correct
+    configLayer.visibility === true;
+
+    // change visibility
+    configLayer.visibility = false;
+
+    // expect 'Visibility changed' to appear in the console
+
+    // check visibility changed
+    configLayer.visibility === false;
+
+FETCH ATTRIBUTES
+    // subscribe to attributes added
+    configLayer.attributesAdded.subscribe(l => console.log('Attributes added'));
+
+    // download attributes
+    configLayer.fetchAttributes();
+
+    // expect 'Attributes added' to appear in console
+
+CHANGE ATTRIBUTES
+    // subscribe to attributes changed
+    configLayer.attributesChanged.subscribe(l => console.log('Attributes changed'));
+
+    // change single attribute field of layer whose attributes are already downloaded
+    configLayer.setAttributes(1, 'Country', 'new Country');
+
+    // change all attributes for specific OID of layer whose attributes are already downloaded
+    configLayer.setAttributes(2, { Country: 'Country is new', OBJECTID: -1 });
+
+    // expect 'Attributes changed' to appear in console
+
+GET ATTRIBUTES
+    // get attributes for layer whose attributes are already downloaded
+    configLayer.getAttributes();
+
+    // expect an array of all layer attributes to appear in console
+
+    // get single attribute by OID for layer whose attributes are already downloaded
+    configLayer.getAttributes(5);
+
+    // expect single object corresponding to OID 5 to appear in the console
+
+REMOVE ATTRIBUTES / GET ATTRIBUTES
+    // subscribe to attributes added
+    configLayer.attributesAdded.subscribe(l => console.log('Attributes added'));
+
+    // subscribe to attributes removed
+    configLayer.attributesRemoved.subscribe(l => console.log('Attributes removed'));
+
+    // remove single attribute field of layer whose attributes are already downloaded
+    configLayer.removeAttributes(5);
+
+    // expect 'Attributes removed' to appear in the console
+
+    // confirm attribute for OID 5 removed, but others still persist
+    configLayer.getAttributes(5) === undefined;
+    configLayer.getAttributes(10) !== undefined;
+
+    // remove all remaining attributes
+    configLayer.removeAttributes();
+
+    // confirm all attributes are removed by first checking a previously existing attribute was removed
+    configLayer.getAttributes(10) === undefined;
+
+    // expect getAttributes to return an empty array initially, while fetching attributes
+    configLayer.getAttributes().length === 0;
+
+    // attributes should have been downloaded again when getAttributes was called
+    // expect 'Attributes added' to appear in console
+
+PAN TO BOUNDARY
+    // zoom in as far on the map as possible and check zoom level
+    RZ.mapById('mobile-map').zoom === 17;
+
+    // turn on the bounding box for the layer whose boundary is being panned to and then pan to layer boundary
+    configLayer.panToBoundary();
+
+    // expect the bounding box to fit completely inside the screen
+
+    // expect the map zoom level to have changed accordingly
+    RZ.mapById('mobile-map').zoom === 4;
+
+ZOOM TO SCALE
+    // assume layer is scale dependent and not visible unless zoom level is 6 or more
+
+    // zoom out as far on the map as possible and check zoom level
+    RZ.mapById('mobile-map').zoom === 0;
+
+    // expect layer to not be visible at current scale
+
+    // zoom to layer scale
+    configLayer.zoomToScale();
+
+    // expect the layer to now be visible
+
+    // expect the map zoom level to have changed accordingly
+    RZ.mapById('mobile-map').zoom === 6;
+
+    // zoom in a few levels on the map and check zoom level
+    const currentZoom = RZ.mapById('mobile-map').zoom;
+    currentZoom > 6;
+
+    // expect layer to still be visible at current scale
+
+    // zoom to layer scale again
+    configLayer.zoomToScale();
+
+    // expect nothing to have changed
+    RZ.mapById('mobile-map').zoom === currentZoom;

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>FGP Viewer</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+</head>
+
+<body style="padding:20px;">
+    <h1>Federal Geospatial Platform Visualiser - <span style="color:blue"> Config Layer Tests</span></h1>
+
+    <div class="row" id="main" style="display:flex">
+    <div style="width:25%; padding:10px; background-color:lightgrey; border:solid;" class="column">
+        
+        <div id = "Layer Name Tests">
+            <h2>Toggle Layer Name: </h2>
+            <p>If layer name + layer id changes properly, button will toggle.<p>
+            <button id="ChangeName">to 'new Name'</button>
+        </div>
+
+        <div id = "Opacity Tests">
+            <h2>Toggle Opacity: </h2>
+            <p>If opacity changes properly, button will toggle.<p>
+            <button id="ChangeOpacity">to 0.3</button>
+        </div>
+
+        <div id = "Visibility Tests">
+            <h2>Toggle Visibility: </h2>
+            <p>If visibility changes properly, button will toggle.<p>
+            <button id="ChangeVisibility">Make Invisible</button>
+        </div>
+
+        <div id = "Attributes Tests">
+            <h2>Attributes Tests: </h2>
+            <p>If button is already green, no need to click it.<p>
+            <button id="FetchAttributes">Fetch Attributes</button><br>
+            <!--disabled until Fetch Attributes activated-->
+            <button id="SetSingleAttribute" disabled>Set New Attribute (OID 1)</button>
+            <button id="SetAllAttributes" disabled>Set All Attributes (OID 2)</button><br>
+            <p>Double check "get attribute" output with datagrid.</p>
+            <button id="GetAttribute" disabled>Get Attribute (OID 5)</button>
+            <button id="GetAllAttributes" disabled>Get All Attributes</button>
+            <P>output:<span id ="output"></span></P>
+        </div>
+    </div>
+</div>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="config-layer-tests.js"></script>
+</body>
+</html>
