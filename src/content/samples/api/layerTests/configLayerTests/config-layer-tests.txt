@@ -94,8 +94,6 @@ GET ATTRIBUTES
     // expect single object corresponding to OID 5 to appear in the console
 
 REMOVE ATTRIBUTES / GET ATTRIBUTES
-    // subscribe to attributes added
-    configLayer.attributesAdded.subscribe(l => console.log('Attributes added'));
 
     // subscribe to attributes removed
     configLayer.attributesRemoved.subscribe(l => console.log('Attributes removed'));

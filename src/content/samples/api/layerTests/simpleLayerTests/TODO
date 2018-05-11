@@ -1,0 +1,6 @@
+-Fix bug with Geometry Added
+-E6 Style Guide
+-Angular Style Guide
+-Double check logic
+-Did it build successfully? --> Rebase onto main branch? 
+-Missing console.log tests/red button tests?
