@@ -4,3 +4,111 @@
 -Double check logic
 -Did it build successfully? --> Rebase onto main branch? 
 -Missing console.log tests/red button tests?
+
+
+=---------------------------------------------------------------------------------------------------------------------------------------
+GEOMETRY TESTS
+
+
+
+SETUP
+    // set the simple layer to a constant for ease of use
+    const simpleLayer = RZ.mapById('mobile-map').simpleLayer;
+
+TEAR DOWN (after each 'test')
+    // remove all geometry added to the simple layer
+    simpleLayer.removeGeometry();
+
+TEST POINT GEOMETRY
+    // create different types of API points
+    const pointA = new RZ.GEO.Point(0, 'https://image.flaticon.com/icons/svg/17/17799.svg', [-79, 43]);
+    const pointE = new RZ.GEO.Point(4, 'M24.0,2.199C11.9595,2.199,2.199,11.9595,2.199,24.0c0.0,12.0405,9.7605,21.801,21.801,21.801c12.0405,0.0,21.801-9.7605,21.801-21.801C45.801,11.9595,36.0405,2.199,24.0,2.199zM31.0935,11.0625c1.401,0.0,2.532,2.2245,2.532,4.968S32.4915,21.0,31.0935,21.0c-1.398,0.0-2.532-2.2245-2.532-4.968S29.697,11.0625,31.0935,11.0625zM16.656,11.0625c1.398,0.0,2.532,2.2245,2.532,4.968S18.0555,21.0,16.656,21.0s-2.532-2.2245-2.532-4.968S15.258,11.0625,16.656,11.0625zM24.0315,39.0c-4.3095,0.0-8.3445-2.6355-11.8185-7.2165c3.5955,2.346,7.5315,3.654,11.661,3.654c4.3845,0.0,8.5515-1.47,12.3225-4.101C32.649,36.198,28.485,39.0,24.0315,39.0z', [79, 32]);
+
+    // add points to layer
+    simpleLayer.addGeometry([ pointA, pointE]);
+
+    // create hoverpoint instances and add them to the different points
+    const hoverPointA = new RZ.GEO.HoverPoint(0, 'my annotation', { position: 'right' });
+    const hoverPointB = new RZ.GEO.HoverPoint(1, '<a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a>', { keepOpen: true, position: 'left' });
+    pointA.addHoverpoint(hoverPointA);
+    pointE.addHoverpoint(hoverPointB);
+
+    // add points to the layer
+    simpleLayer.addGeometry([pointA, pointE]);
+
+    // confirm hoverpoint and geometry got added correctly
+    simpleLayer.geometry.length === 2;
+    simpleLayer.geometry[0].hoverpoint !== null;
+    simpleLayer.geometry[1].hoverpoint !== null;
+
+    // hover over pointA and expect an annotation to open to the right of the point as long as the point is still being hovered on
+    // hover over pointE and expect an annotation to remain open to the left of the point even if the point is not being hovered on any longer
+
+    // remove both hoverpoints from the geometries
+    simpleLayer.geometry.forEach(geometry => {
+        geometry.removeHoverpoint();
+    });
+
+    // confirm hoverpoint got removed correctly
+    simpleLayer.geometry[0].hoverpoint === null;
+    simpleLayer.geometry[1].hoverpoint === null;
+
+    // hover over either point and expect no annotation to open
+
+TEST MULTIPOINT GEOMETRY
+    // create different types of API points
+    const pointA = new RZ.GEO.Point(0, 'https://image.flaticon.com/icons/svg/17/17799.svg', [-79, 43]);
+    const pointE = new RZ.GEO.Point(4, 'M24.0,2.199C11.9595,2.199,2.199,11.9595,2.199,24.0c0.0,12.0405,9.7605,21.801,21.801,21.801c12.0405,0.0,21.801-9.7605,21.801-21.801C45.801,11.9595,36.0405,2.199,24.0,2.199zM31.0935,11.0625c1.401,0.0,2.532,2.2245,2.532,4.968S32.4915,21.0,31.0935,21.0c-1.398,0.0-2.532-2.2245-2.532-4.968S29.697,11.0625,31.0935,11.0625zM16.656,11.0625c1.398,0.0,2.532,2.2245,2.532,4.968S18.0555,21.0,16.656,21.0s-2.532-2.2245-2.532-4.968S15.258,11.0625,16.656,11.0625zM24.0315,39.0c-4.3095,0.0-8.3445-2.6355-11.8185-7.2165c3.5955,2.346,7.5315,3.654,11.661,3.654c4.3845,0.0,8.5515-1.47,12.3225-4.101C32.649,36.198,28.485,39.0,24.0315,39.0z', [79, 32]);
+
+    // create a multipoint instance using coordinates and pre-existing API points
+    const multipointB = new RZ.GEO.MultiPoint(11, '', [pointA, pointE, [79, 43], [-79, 32]]);
+
+    // create a hoverpoint instance and add it to the multipoint
+    const hoverPointB = new RZ.GEO.HoverPoint(1, '<a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a>', { followCursor: true, position: 'right' });
+    multipointB.addHoverpoint(hoverPointB);
+
+    // add multipoint to the layer
+    simpleLayer.addGeometry(multipointB);
+
+    // confirm hoverpoint and geometry got added correctly
+    simpleLayer.geometry.length === 1;
+    simpleLayer.geometry[0].hoverpoint !== null;
+
+    // hover over any of the points and expect an annotation to open which will follow the cursor as long as the point is being hovered on
+
+    // remove the hoverpoint from the geometry
+    simpleLayer.geometry[0].removeHoverpoint();
+
+    // confirm hoverpoint got removed correctly
+    simpleLayer.geometry[0].hoverpoint === null;
+
+    // hover over any of the points and expect no annotation to open
+
+TEST LINE GEOMETRY
+    // create different types of API points
+    const pointA = new RZ.GEO.Point(0, 'https://image.flaticon.com/icons/svg/17/17799.svg', [-79, 43]);
+    const pointE = new RZ.GEO.Point(4, 'M24.0,2.199C11.9595,2.199,2.199,11.9595,2.199,24.0c0.0,12.0405,9.7605,21.801,21.801,21.801c12.0405,0.0,21.801-9.7605,21.801-21.801C45.801,11.9595,36.0405,2.199,24.0,2.199zM31.0935,11.0625c1.401,0.0,2.532,2.2245,2.532,4.968S32.4915,21.0,31.0935,21.0c-1.398,0.0-2.532-2.2245-2.532-4.968S29.697,11.0625,31.0935,11.0625zM16.656,11.0625c1.398,0.0,2.532,2.2245,2.532,4.968S18.0555,21.0,16.656,21.0s-2.532-2.2245-2.532-4.968S15.258,11.0625,16.656,11.0625zM24.0315,39.0c-4.3095,0.0-8.3445-2.6355-11.8185-7.2165c3.5955,2.346,7.5315,3.654,11.661,3.654c4.3845,0.0,8.5515-1.47,12.3225-4.101C32.649,36.198,28.485,39.0,24.0315,39.0z', [79, 32]);
+
+    // create a line instance using pre-existing API points
+    const lineB = new RZ.GEO.LineString(12, [pointA, pointE]);
+
+    // create a hoverpoint instance and add it to the line
+    const hoverPointB = new RZ.GEO.HoverPoint(1, '<a href="https://www.w3schools.com/html/">Visit our HTML tutorial</a>', { keepOpen: true, followCursor: true, position: 'bottom' });
+    lineB.addHoverpoint(hoverPointB);
+
+    // add line to the layer
+    simpleLayer.addGeometry([lineB]);
+
+    // confirm hoverpoint and geometry got added correctly
+    simpleLayer.geometry.length === 1;
+    simpleLayer.geometry[0].hoverpoint !== null;
+
+    // hover over the line and expect an annotation to remain open below the line even if the line is not being hovered on any longer
+
+    // remove the hoverpoint from the geometry
+    simpleLayer.geometry[0].removeHoverpoint();
+
+    // confirm hoverpoint got removed correctly
+    simpleLayer.geometry[0].hoverpoint === null;
+
+    // hover over the line and expect no annotation to open

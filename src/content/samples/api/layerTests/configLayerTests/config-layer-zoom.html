@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>FGP Viewer</title>
+    <meta content="width=device-width,initial-scale=1" name="viewport">
+</head>
+
+<body style="padding:20px;">
+    <h1>Federal Geospatial Platform Visualiser - <span style="color:blue"> Config Layer Tests (Part 2)</span></h1>
+
+    <div class="row" id="main" style="display:flex">
+    <div style="width:20%; height:900px; padding:10px; background-color:lightgrey; border:solid;" class="column">
+        <div id = "Zoom Tests">
+            <h2>Zoom Tests: </h2>
+            <p>1. Zoom in as far as possible. Check zoom level.<p>
+            <button id="CheckZoomLevel">Zoom In Check</button><br>
+            <p>2. Zoom out as possible. Check zoom level.<p>
+            <button id="CheckZoomLevel2">Zoom Out Check</button><br>
+            <p>3. Automatic Checks:</p>
+            <button id="PanToBoundary">Pan To Boundary</button>
+            <button id="ZoomToScale" disabled>Zoom To Scale (Part 1)</button><br>
+            <p>4. Activated by successful Part 1. Zoom in bit more, click on button.</p>
+            <p>   (Hint: Click Part 1 in case of accidental zoom out)</p>
+            <button id="ZoomToScale2" disabled>Zoom To Scale (Part 2)</button><br>
+        </div>
+    </div>
+</div>
+    <script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <script src="config-layer-zoom.js"></script>
+</body>
+</html>
