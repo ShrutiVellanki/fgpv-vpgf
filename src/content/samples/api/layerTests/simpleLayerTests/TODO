@@ -2,14 +2,10 @@
 -E6 Style Guide
 -Angular Style Guide
 -Double check logic
--Did it build successfully? --> Rebase onto main branch? 
+-Did it build successfully? --> Rebase onto main branch?
 -Missing console.log tests/red button tests?
-
-
-=---------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------------------------------------------------------------------------------------
 GEOMETRY TESTS
-
-
 
 SETUP
     // set the simple layer to a constant for ease of use
