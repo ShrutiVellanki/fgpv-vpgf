@@ -1,50 +1,35 @@
-import {Panel} from "panel-api.js";
-import {PanelElem} from "panel-api.js";
-import {Control} from "panel-api.js";
+$.getScript('./panel-api.js', function () {
 
-$('head').append($('<link rel="stylesheet" type="text/css" />').attr('href', '../../../rv-styles.css'));
+    var panelCount = 0;
+    var lightyear;
 
-$.getScript('../../../rv-main.js', function () {
-    //RZ.mapAdded.subscribe(mapi => {
+    $("#ConstructPanel").click(function () {
+        lightyear = new Panel("dummyMap", "Buzz Lightyear", "Ground Control");
+        $("#GetControl").prop('disabled', false);
+    });
 
+    //TODO: actual Control object.
+    $("#GetControl").click(function () {
+        alert(lightyear.control);
+        console.log(lightyear.control);
+        $("#GetID").prop('disabled', false);
+    });
 
-            const panelTemplate =
-            '<div class="panelArea " style="top:0px left:0px  margin-left:10px">
-                <button class="ClosePanel">Close Panel</button>
-                <div class ="panelContents"  style="border: 5px solid gray">
-                  <div class ="panelControls"></div>
-                  <div class = "panelBody"></div>
-                </div>
-            </div>';
+    $("#GetID").click(function () {
+        alert(lightyear.id);
+        console.log(lightyear.id);
+        $("#SetContentBefore").prop('disabled', false);
+    });
 
-            //This mimics addPanel function to be added to map API --> would subscribe to panelAdded
-            //notice how rest of functions need to be nestled into "AddPanel"
-            $("#AddPanel").click(function () {
-                $("#main").append(panelTemplate);
-                const newPanel = new Panel();
+    $("#SetContentBefore").click(function () {
+        alert(lightyear.id);
+        console.log(lightyear.id);
+        //$("#GetContentBefore").prop('disabled', false);
+    });
 
-                //BUTTON TO BE CONTAINED WITHIN PANEL API
-                $("#ClosePanel").click(function (){
-                    if(document.getElementById("ClosePanel").innerHTML == "Close Panel"){
-                        newPanel.close();
-                    }
-                    else{
-                        newPanel.open();
-                    }
-
-                });
-
-                $("#zIndex").click(function (){
-                    newPanel.zindex = 2;
-                });
-
-            });
-
-    //});
-
-    /*$('#main').append(`
-        <div id="fgpmap" style="height:700px; width:75%; margin-left:10px" class="column" rv-langs='["en-CA", "fr-CA"]' rv-service-endpoint="http://section917.cloudapp.net:8000/"></div>
-    `);*/
-
-    //const mapInstance = new RZ.Map(document.getElementById('fgpmap'), '../../config.rcs.[lang].json');
 });
+
+
+
+
+

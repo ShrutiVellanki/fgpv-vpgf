@@ -1,20 +1,17 @@
-1. AddPanel()
-   a) "Add Panel" button [Test HTML] --> drops addPanel div on map [TEST JS]
-   c) "Panel Object" is added to PanelRegistry[] [TEST JS]
-   b) Constructs newPanel --> passes (PanelRegistry.length). All panel elements classes identifiable by panel number
+1. AddPanel()   
    d) Adding a subpanel? --> maybe start indexing these like 1-2, 3-2, 4-5 etc. First number for parent, next for child
-   e) Open/close button API calls
+   -Transfer to map.addPanel
    -End goal: This button will make call to map.addPanel(panel)
    -End goal: map.addPanel has a PanelRegistry[]
+   -Really, addPanel in mapAPI would have parameters with ID, controls
 
 2. Panel Constructor
-  a) Modify div class names, record them for future use throughout API
   b) Set default width and height
-  c) Set id both on panelContent div ad as panel id for future use (if defined)
   d) change panel-template.html --> open/close button should be scoped as BUTTON
   e) Set controls section if defined --> if undefined, pass in array with single closebutton
      --> set controls part of HTML as control
-  f) 
+  f) Error messages for panels exceeding map edge? (ask Miles)
+  g) have constructor pass in map element/parent div. 
 
 3. Control class
   a) getHTML string --> go thru each element add to string
@@ -22,6 +19,9 @@
   c) Default top: have elements in a vertical list
   d)check if element is closebutton (specialID) --> if not present, add it
 
+4. Setters for width and height of panel
+-Custom logic to keep elements on map
+-No checking for parameter types
 
 
 class Panel {
@@ -72,3 +72,51 @@ Also:
   //temporarily keep track of panels in AddPanel function
   //This way don't have to refer to panel buttons/elements by ids --> just by numbers (eg: panelArea1, closeButton1, panelContent1)
   ////QUESTION: to confirm PanelElement is just one element? or is it a collection of elements?
+  //Need to replace jQuery with import statements?
+
+
+
+  DONE: 
+
+  1. AddPanel()
+   a) "Add Panel" button [Test HTML] --> drops addPanel div on map [TEST JS]
+   c) "Panel Object" increments panelCount [TEST JS]
+   b) Constructs newPanel --> passes (panelCount). All panel elements ids identifiable by panel number
+
+2. Panel Constructor
+  a) Set ids for according to panelCount for future use in other methods
+  c) Set id both on panelContent div ad as panel id for future use (if defined)
+
+3. Control class
+
+
+-JQUERY<HTMLElement> for PanelElem
+
+
+
+    //This mimics addPanel function to be added to map API --> would subscribe to panelAdded
+    //notice how rest of functions need to be nestled into "AddPanel"
+    //Really, addPanel in mapAPI would have parameters with ID, controls
+
+    //1. Construct new panels (want construction to be separate from adding)
+    //2. Have panels add themselves to document when add panel button is clicked on
+    //3. Problem --> if user sets height/width etc before adding panel to map? 
+    //4. For testing purposes:
+    //construct three different panels
+    //on add panel lightyear --> trigger addPanel method
+    //on add panel aldrin --> trigger addPanel method
+    //on add panel skywalker --> trigger addPanel method
+
+
+
+
+    //BUTTON TO BE CONTAINED WITHIN PANEL API
+    /*$("#ClosePanel").click(function () {
+        if (document.getElementById("ClosePanel").innerHTML == "Close Panel") {
+                newPanel.close();
+            }
+            else {
+                newPanel.open();
+            }
+
+        });*/
