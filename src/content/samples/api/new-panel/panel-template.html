@@ -1,4 +1,16 @@
-<div id="panelArea">
-    <button>Close Panel</button>
-    <div id ="panelContents"  style="border: 5px solid gray; margin-left:10px"></div> 
+<!--The panel to be dropped onto map
+panelArea: Container for panel including close/open button
+panelContents: The actual contents of the panel
+panelControls: Panel controls (default to top, can be reoriented)
+panelBody: all of the PanelElem(s) that are not controls.
+panel defaults to top-left of parent div (map div)
+-->
+
+
+<div class="panelArea " style="top:0px left:0px  margin-left:10px">
+    <button id="ClosePanel">Close Panel</button>
+    <div class ="panelContents"  style="border: 5px solid gray">
+      <div class ="panelControls"></div>
+      <div class = "panelBody"></div>
+    </div>
 </div>
