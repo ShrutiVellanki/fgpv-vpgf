@@ -16,47 +16,87 @@
 
             <h3>Following buttons make calls to Panel API:</h3>
 
-            <button id="ConstructPanel">Construct Panel</button><br>  
-            <p>Check for undefined AND defined id+controls!</p><br>
-            
+            <button id="ConstructPanelElems">Construct PanelElems</button>
+            <br>
+            <button disabled id="SetStringElem">Set String Elem</button>
+            <br>
+            <button disabled id="SetInputElem">Set HTML Input Elem</button>
+            <br>
+            <button disabled id="SetButtonElem">Set HTML Button Elem</button>
+            <br>
+            <br>
+
+
+            <button disabled id="ConstructPanel">Construct Panel</button>
+            <br>
+            <button id="GetElement" disabled>Get Panel Shell Element</button>
+            <br>
+            <!--<p>Check for undefined AND defined id+controls!</p><br>-->
+
             <!--Following buttons get activated once panel is constructed-->
 
-            <button id="GetControl" disabled>Get Control</button><br>
-            <button id="FindControlElement" disabled>Find Control Element</button><br>            
+            <button id="GetControl" disabled>Get Control</button>
+            <br>
+            <button id="FindControlElement" disabled>Find Control Element</button>
+            <br>
+            <br>
+
+            <button id="GetID" disabled>Get Id</button>
+            <br>
+            <button id="SetZIndex" disabled>Set Z-Index (-1000)</button>
+            <br>
+            <button id="SetPosition" disabled>Set Position (top: 20, left: 60, bottom: undefined, right: 90)</button>
+            <br>
+            <button id="SetWidth" disabled>Change Width to 300px</button>
+            <br>
+            <button id="SetHeight" disabled>Change Height to 20%</button>
+            <br>
+            <button id="SetWidthOverflow" disabled>Change Width to 10000px (Overflow)</button>
+            <br>
+            <button id="SetHeightOverflow" disabled>Change Height to 2000% (Overflow)</button>
+            <br>
+            <button id="SetPositionOverflow" disabled>Set Position (Overflow)</button>
+            <br>
+            <br>
 
 
-            <button id="GetID" disabled>Get Id</button><br>
-            <button id="SetContentBefore" disabled>Set Content (Before)</button><br>
-            <button id="GetContentBefore" disabled>Get Content (Before)</button><br>
-            <button id="SetZIndexBefore" disabled>Set z-Index (Before)</button><br>
-            <button id="getElement" disabled>Get Element</button><br>
-            <button id="SetPositionBefore" disabled>Set Position (Before)</button><br>
-            <button id="SetWidthBefore" disabled>Set Width (Before)</button><br>
-            <button id ="SetHeightBefore" disabled>Set Height (Before)</button><br><br>
+
+            <button id="SetContent" disabled>Set Content</button>
+            <br>
+            <button id="GetContent" disabled>Get Content</button>
+            <br>
+            <button id="SetVisibleInput" disabled>Set InputElem Visible</button>
+            <br>
+            <button id="SetVisibleButton" disabled>Set ButtonElem Visible</button>
+            <br>
+            <br>
 
             <button id="AddPanel" disabled>Add Panel</button>
-            <p>Test Open/Close Button</p>
-            <p>Test Opening/Closing of Panels</p><br>
+            <!--<p>Test Open/Close Button</p>
+            <p>Test Opening/Closing of Panels</p><br>-->
 
             <!--Probably done by panel.controls.orientation(top) etc
                 Could modify content and controls ids at same time-->
-            <p>Modify Control Orientation:</p>
-            <button id="TopOrientation" disabled>Top Orientation(Default)</button><br>
-            <button id="LeftOrientation" disabled>Left Orientation</button><br>
-            <button id="RightOrientation" disabled>Right Orientation</button><br>
-            <button id="BottomOrientation" disabled>Bottom Orientation</button><br><br>
-
-            <button id="SetContentAfter" disabled>Set Content (After)</button><br>
-            <button id="GetContentAfter" disabled>Get Content (After)</button><br>
-            <button id="SetZIndexAfter" disabled>Set z-Index (After)</button><br>
-            <button id="getElement" disabled>Get Element</button><br>
-            <button id="SetPositionAfter" disabled>Set Position (After)</button><br>
-            <button id="SetWidthAfter" disabled>Set Width (After)</button><br>
-            <button id ="SetHeightAfter" disabled>Set Height (After)</button><br>
+            <p>Modify Controls Orientation:</p>
+            <button id="TopOrientation" disabled>Top Orientation(Default)</button>
+            <br>
+            <button id="LeftOrientation" disabled>Left Orientation</button>
+            <br>
+            <button id="RightOrientation" disabled>Right Orientation</button>
+            <br>
+            <button id="BottomOrientation" disabled>Bottom Orientation</button>
+            <br>
+            <br>
 
             <p>Tests for multiple panels on same map!</p>
-            
-            
+            <br>
+            <br>
+            <br>
+            <input type="text" value="Input PanelElem" id="coolInput"></input>
+            <button id="coolButton">Button PanelElem</button>
+
+
+
         </div>
         <div id="dummyMap" class="column" style="text-align:center; width:65%; padding:10px; height:700px; margin-left:10px; background-color:lightgrey; border:solid; overflow: hidden">
             DUMMY MAP AREA

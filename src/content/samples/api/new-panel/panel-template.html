@@ -6,4 +6,8 @@ panelBody: all of the PanelElem(s) that are not controls.
 panel defaults to top-left of parent div (map div)
 -->
 
-<div class ="panelContents"  style="border: 5px solid gray"><div class ="panelControls"></div><div class = "panelBody"></div></div>
+<div hidden id ="panelContents" style="border: 5px solid gray; margin: 10px; position:relative; top:0px; left:0px">
+    <div id ="panelControls"></div>
+    <div id = "panelBody"></div>
+</div>
+<script src="panel-api.js"></script>
