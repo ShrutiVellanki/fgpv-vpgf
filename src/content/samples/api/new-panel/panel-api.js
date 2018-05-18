@@ -1,3 +1,24 @@
+class Control {
+
+    /**
+    * Creates a new Controls object.
+    * @constructor Controls
+    * @param {(PanelElem)[]} controls - the array of PanelElems to be used as panel controls
+    */
+    constructor(controls) {
+
+
+        var openBtn = new Btn(0);
+        openBtn.text = "Close Panel";
+        //goes through controls and checks for if Btn Elem
+        //if Btn elem is boolean true
+        //if so:
+        this._array = [openBtn];
+        //if not: 
+        //this._control_array = controls + btnElem
+    }
+}
+
 class Panel {
 
     /**
@@ -5,7 +26,7 @@ class Panel {
     * @constructor Panel
     * @param {number} panelCount - the number of panels (including this one) there are on the map instance
     * @param {string} parentID - the parentID of this panel (usually the map instance where panel sits)
-    * @param {(string|number)} [pID] - the user defined ID name for this panel 
+    * @param {(string|number)} [pID] - the user defined ID name for this panel
     * @param {Control} [control] - the user defined controls for this panel
     */
     constructor(panelCount, parentID, pID = undefined, control = undefined) {
@@ -16,8 +37,8 @@ class Panel {
         this._control = control;
         this._content = [];
 
-        //add panel template to map/parent div
-        var panelSnippet = '<div hidden id ="panelContents" style="border: 5px solid gray; margin: 10px; position:relative; top:0px; left:0px"><div id ="panelControls"></div><div id = "panelBody"></div></div>';
+        //Box design credit: https://codepen.io/deam0n/pen/RRzmjq
+        var panelSnippet = '<div hidden id ="panelContents" style="background: #F2F2F2; border: 1px solid #ccc; box-shadow: 1px 1px 2px #fff inset, -1px -1px 2px #fff inset; margin: 10px; position:relative; top:0px; left:0px"><div id ="panelControls" style="border: 1px solid #ccc;"></div><div id = "panelBody"></div></div>';
         $("#" + this._parent_id).append(panelSnippet);
 
         //panel template's div IDs can now be referred to by panelCount
@@ -25,11 +46,20 @@ class Panel {
         this._panel_controls = "panelControls" + panelCount.toString();
         this._panel_body = "panelBody" + panelCount.toString();
 
-        //update panel template's div IDs, 
+        //update panel template's div IDs,
         document.getElementById("panelContents").id = this._panel_contents;
         document.getElementById("panelControls").id = this._panel_controls;
         document.getElementById("panelBody").id = this._panel_body;
         document.getElementById(this._panel_contents).className = pID;
+
+        //First empty existing controls
+        $("#" + this._panel_controls).empty();
+
+        //goes through controls and appends to panel controls! 
+        for (let elem of this._control._array) {
+            $("#" + this._panel_controls).append(elem._element);
+            $("#" + this._panel_controls).append("<br>");
+        }
 
         //set default widths and heights for panel
         this.width = "400px";
@@ -65,40 +95,59 @@ class Panel {
     }
 
     /**
-    * Returns controls for panel
-    * @return {Control} - object that encloses controls for panel
+    * Returns the Control object that contains panel controls
+    * @return {Control} - the Control element containing panel controls
     */
     get control() {
         return this._control;
     }
 
+    /**
+    * Returns contents for panel
+    * @return {(PanelElem|Panel)[]} - a list of contents of the main panel
+    */
     get content() {
         return this._content;
     }
 
+    /**
+    * Sets the contents for the Panel
+    * @param {(PanelElem|Panel)[]} content - a list of contents to be set for the main panel
+    */
     set content(content) {
         this._content = content;
-        //TODO:
-        //for each item in content, convert to div that goes into panel "Content"
-        //maybe have line separating content. 
 
+        //First empty existing content
+        $("#" + this._panel_body).empty();
+
+        //then fill in new contents
         for (let elem of content) {
             $("#" + this._panel_body).append(elem._element);
+            $("#" + this._panel_body).append('<br>');
         }
+
+        //check if content makes panel height too big
+        this.checkOutOfBounds();
     }
 
-    //id is set to class name because easier to set id property to manipulate other divs
+    /**
+    * Sets the id for the Panel
+    * @return {string} - the id of the panel, if set
+    */
     get id() {
-        return document.getElementById(this._panel_contents).className;
+        return document.getElementById(this._panel_contents).className.toString();
     }
 
-    // Can be pixels or percent
-    // Will never exceed map edge
+    /**
+    * Sets the width of panel, such that when added will never exceed map edge
+    * @param {(string|number)} width - string (can specify px or %), number (defaults to px)
+    */
     set width(width) {
 
         if (typeof width === "number") {
             document.getElementById(this._panel_contents).style.width = width.toString() + "px";
         }
+        //for strings without "px" or "%"" specifications
         else if (width.slice(-2) !== "px" && width.slice(-1) !== "%") {
             document.getElementById(this._panel_contents).style.width = width + "px";
         }
@@ -106,23 +155,26 @@ class Panel {
             document.getElementById(this._panel_contents).style.width = width;
         }
 
+        //if panel is added to map, check to see its not out of bounds
         if (this._map_added) {
             this.checkOutOfBounds();
         }
     }
 
-    //2 cases: panel is added to screen, can actually modify zIndex property of panel
-    //if zindex is defined BEFORE its added, need to make sure its set properly upon addition --> so in zindex added method.
-    //TODO: remove alert (only for testing purposes)
+    /**
+    * Sets the zindex of panel
+    * @param {number} zindex - the zindex value
+    */
     set zindex(zindex) {
         document.getElementById(this._panel_contents).style.zIndex = zindex;
-        alert("Z Index set to: " + zindex.toString());
+        alert("Z Index set to: " + zindex.toString());//TODO: remove alert
     }
 
-    // Can be pixels or percent
-    // Will never exceed map edge
+    /**
+    * Sets the height of panel, such that when added will never exceed map edge
+    * @param {(string|number)} height - string (can specify px or %), number (defaults to px)
+    */
     set height(height) {
-
         if (typeof height === "number") {
             document.getElementById(this._panel_contents).style.height = height.toString() + "px";
         }
@@ -138,13 +190,22 @@ class Panel {
         }
     }
 
-    //returns panel shell element
-    //introduces problem here where no real way to get panel shell unless HTML snippet is in a different file.
+    /**
+    * Returns panel shell element
+    * @return {jQuery<HTMLElement>} - shell element that holds controls and content of panel
+    */
     get element() {
         return document.getElementById(this._panel_contents);
+        //TODO: does it actually return jQuery<HTMLElement>?
     }
 
-    //position defined in numbers, need to be changed toString pixels
+    /**
+    * Position is relative to map's top and left iff no control object given, otherwise relative to controls
+    * @param {number} top - top position of panel in pixels
+    * @param {number} left - left position of panel in pixels
+    * @param {number} bottom - bottom position of panel in pixels
+    * @param {number} right - right position of panel in pixels
+    */
     position(top, left, bottom, right) {
         if (top != undefined) {
             document.getElementById(this._panel_contents).style.top = top.toString() + "px";
@@ -168,12 +229,14 @@ class Panel {
 
     }
 
-    //Auto sets width and height to 20% of parent div
-    //If position was out of bounds, autosets to default position (remember position ALWAYS IN PIXELS)
+    /**
+    * Auto sets width and height to 20% of parent div
+    * If position was out of bounds, autosets to default panel position.
+    */
     checkOutOfBounds() {
 
         if (document.getElementById(this._parent_id).clientHeight < document.getElementById(this._parent_id).scrollHeight) {
-            alert("Panel height too big: changing to 20%")
+            alert("Panel height too big: changing to 20%") //TODO: remove alerts
             document.getElementById(this._panel_contents).style.height = "20%"
         }
 
@@ -207,51 +270,65 @@ class Panel {
 
 class PanelElem {
 
-    //pregenerated id --> "pe and elemNum"
+    /**
+    * Constructs PanelElem objct
+    * @param {number} elemNum - number that specifies the number of the PanelElem on panel
+    *                           used for pregenerating PanelElem ids
+    */
     constructor(elemNum) {
-        //this._visible = true;
         this._id = "pe" + elemNum.toString();
+        this._element_set = false;
     }
 
-    //element can be string, HTMLElement, jQuery<HTMLElement>
-    //TODO: jQuery<HTMLElement>
+    /**
+    * Constructs PanelElem objct
+    * @param {number} elemNum - number that specifies the number of the PanelElem on panel
+    *                           used for pregenerating PanelElem ids
+    */
     set element(element) {
-
 
         if (typeof element === "string") {
             this._element = $.parseHTML(element);
-            //console.log(this._element);
         }
         else {
             this._element = element;
-            if (element.id !== undefined) {
-                this._id = element.id;
-            }
         }
 
-        //this._element_set = true;
+        //checks if element is jquery object
+        if (!this._element.jquery) {
+            this._element = $(this._element);
+        }
 
+        this._element.attr('id', this._id);
+        this._element.css('padding-bottom', "3px");
+        this._element.css('border-bottom', "white solid 1px");
 
-
-        //changes actual element visibility once element set
-        //this.visible = this._visible;
+        this._element_set = true;
     }
 
-    //sets visibility even if element itself is not set --> if set changes actual visibility
-    /*set visible(visible) {
-        this._visible = visible;
+    //visibility can only be changed once element is set (otherwise gets too complicated)
+    set visible(visible) {
 
-        if(this._element_set && this._visible == false){
-            this._element.style.visibility = "hidden";
+        console.log('hello');
+
+        if (this._element_set == true && visible == false) {
+            this._element.css('visibility', 'hidden');
+            this._element.hide();
         }
-        else if (this._element_set && this._visible == true){
-            this._element.style.visibility = "visible";
+        else if (this._element_set == true && visible == true) {
+            this._element.css('visibility', 'visible');
+            this._element.css('padding-bottom', "3px");
+            this._element.css('border-bottom', "white solid 1px");
+            this._element.show();
         }
+
+
     }
 
-    get visible(){
-        return this._visible;
-    }*/
+    //get visibility can only be called once element is set
+    get visible() {
+        return this._element.is(':visible');
+    }
 
     get id() {
         return this._id;
@@ -260,9 +337,30 @@ class PanelElem {
 }
 
 //Control buttons come with open/close for whole panel
-//set visible for each PanelElem OOHHHHHHHHHHH. 
 class Btn extends PanelElem {
     set element(element) {
         throw "Exception: Btn Elements cannot be set!"
     }
+
+    //closeBtn: boolean?
+
+    /*set icon(svg){
+        
+    }*/
+
+    set text(txt) {
+        this._element = $.parseHTML('<button></button>');
+        //checks if element is jquery object
+        if (!this._element.jquery) {
+            this._element = $(this._element);
+        }
+
+        this._element.html(txt);
+        this._element.attr('id', this._id);
+        this._element_set = true;
+    }
+
+    // the scope of this function will include both the Btn and Panel instance, so 
+    // this.panel.close() or this.visible = false is valid.
+    //action: (evt: Event) => void; // on click or enter keypress when focused
 }

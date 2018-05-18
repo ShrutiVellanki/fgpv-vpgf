@@ -1,94 +1,16 @@
-1. AddPanel()   
-   d) Adding a subpanel? --> maybe start indexing these like 1-2, 3-2, 4-5 etc. First number for parent, next for child
-   -Transfer to map.addPanel
-   -End goal: This button will make call to map.addPanel(panel)
-   -End goal: map.addPanel has a PanelRegistry[]
-   -Really, addPanel in mapAPI would have parameters with ID, controls
+TODO:
+- Figure out issue with setting visibility for PanelElems [8:00 - 9:00]
+- Figure out how to add Panels as Panel contents [9:00 - 10:00]
+- Remove unnescessary alerts, double check JSDocs
+- For each new method --> JSDoc comments
+- Make Panel pretty [10:00 - 10:30]
+  -pretty background + border
+  -pretty background + border for each elem/new panel added
+- Figure out how to separate PanelElem and Button Elem [10:30 - 11:30]
+- Get open/close button of panel as first control (+/-) [11:30 - 2:00] (Pod meeting)
+- Embed open/close button in panel elem (eye open/close) [2:00 - 4:00]
 
-2. Panel Constructor
-  b) Set default width and height
-  d) change panel-template.html --> open/close button should be scoped as BUTTON
-  e) Set controls section if defined --> if undefined, pass in array with single closebutton
-     --> set controls part of HTML as control
-  f) Error messages for panels exceeding map edge? (ask Miles)
-  g) have constructor pass in map element/parent div. 
-
-3. Control class
-  a) getHTML string --> go thru each element add to string
-  b)TODO: different orientations
-  c) Default top: have elements in a vertical list
-  d)check if element is closebutton (specialID) --> if not present, add it
-
-4. Setters for width and height of panel
--Custom logic to keep elements on map
--No checking for parameter types
-
-
-class Panel {
-  constructor(control?: Control, id?: string | number): void;
-  open(): void;
-  close(): void;
-  opening: Observable;
-  closing: Observable;
-  get control(): Control | undefined;
-  get content(): (PanelElem | Panel)[];
-  set content(item: (PanelElem | Panel)[]): void;
-  get id(): string;
-  set z-index(number: number): void;
-  // returns the panel shell element
-  get element(): jQuery<HTMLElement>;
-  // position is relative to the maps top and left iff no control object is given,
-  // otherwise it is relative to the controls
-  position(top?: number, left?: number, bottom?: number, right?: number): void;
-  // will never exceed the map edge
-  set width(w: string | number): void; // as pixels or percent, 400 default
-  // can be pixels, percent, or auto (height to match content)
-  // will never exceed the map edge
-  set height(h: string | number): void;
-}
-
-
-
-Also:
-  -Proper commenting
-  -E6 Guidelines
-  -Remove whitespaces
-  -Proper commit messages
-
-  //QUESTIONS:
-  //Should I include things to remove panel or panel elements?
-  //What two panels have same id?
-
-
-  //TODO:
-  //Change to non hardcoded ids to refer to things??????
-  //Like to explain better you're doing document.getElementById --> but how to modify THIS instance of panel?
-  //Guess could do this._id --> document.getElementById(#ClosePanel) to document.getElementById(this._id + "#ClosePanel")
-  //separate API functions from rest of classes
-  //Should button click functions be contained within the PanelApi or separated into Javascript? --> is that where observables come in?
-  //but in situation where panel ID is undefined?
-  //ERROR checking for wrong value type passed through?
-  //Could do for MapApi --> keep track of panel number added
-  //temporarily keep track of panels in AddPanel function
-  //This way don't have to refer to panel buttons/elements by ids --> just by numbers (eg: panelArea1, closeButton1, panelContent1)
-  ////QUESTION: to confirm PanelElement is just one element? or is it a collection of elements?
-  //Need to replace jQuery with import statements?
-
-
-
-  DONE: 
-
-  1. AddPanel()
-   a) "Add Panel" button [Test HTML] --> drops addPanel div on map [TEST JS]
-   c) "Panel Object" increments panelCount [TEST JS]
-   b) Constructs newPanel --> passes (panelCount). All panel elements ids identifiable by panel number
-
-2. Panel Constructor
-  a) Set ids for according to panelCount for future use in other methods
-  c) Set id both on panelContent div ad as panel id for future use (if defined)
-
-3. Control class
-
+*********************************************************************************************************
 
 -JQUERY<HTMLElement> for PanelElem
 
@@ -100,7 +22,7 @@ Also:
 
     //1. Construct new panels (want construction to be separate from adding)
     //2. Have panels add themselves to document when add panel button is clicked on
-    //3. Problem --> if user sets height/width etc before adding panel to map? 
+    //3. Problem --> if user sets height/width etc before adding panel to map?
     //4. For testing purposes:
     //construct three different panels
     //on add panel lightyear --> trigger addPanel method
