@@ -66,6 +66,7 @@ class Panel {
 
     /**
     * Returns controls for panel
+    * @return {Control} - object that encloses controls for panel
     */
     get control() {
         return this._control;
