@@ -5,7 +5,7 @@ class Panel {
     * @constructor Panel
     * @param {number} panelCount - the number of panels (including this one) there are on the map instance
     * @param {string} parentID - the parentID of this panel (usually the map instance where panel sits)
-    * @param {(string|number)} [pID] - the user defined ID name for this panel 
+    * @param {(string|number)} [pID] - the user defined ID name for this panel
     * @param {Control} [control] - the user defined controls for this panel
     */
     constructor(panelCount, parentID, pID = undefined, control = undefined) {
@@ -25,7 +25,7 @@ class Panel {
         this._panel_controls = "panelControls" + panelCount.toString();
         this._panel_body = "panelBody" + panelCount.toString();
 
-        //update panel template's div IDs, 
+        //update panel template's div IDs,
         document.getElementById("panelContents").id = this._panel_contents;
         document.getElementById("panelControls").id = this._panel_controls;
         document.getElementById("panelBody").id = this._panel_body;
@@ -65,39 +65,51 @@ class Panel {
     }
 
     /**
-    * Returns controls for panel
+    * Returns the Control object that contains panel controls
+    * @return {Control} - the Control element containing panel controls
     */
     get control() {
         return this._control;
     }
 
+    /**
+    * Returns contents for panel
+    * @return {(PanelElem|Panel)[]} - a list of contents of the main panel
+    */
     get content() {
         return this._content;
     }
 
+    /**
+    * Sets the contents for the Panel
+    * @param {(PanelElem|Panel)[]} content - a list of contents to be set for the main panel
+    */
     set content(content) {
         this._content = content;
-        //TODO:
-        //for each item in content, convert to div that goes into panel "Content"
-        //maybe have line separating content. 
 
         for (let elem of content) {
             $("#" + this._panel_body).append(elem._element);
         }
     }
 
-    //id is set to class name because easier to set id property to manipulate other divs
+    /**
+    * Sets the contents for the Panel
+    * @return {string} - the id of the panel, if set
+    */
     get id() {
-        return document.getElementById(this._panel_contents).className;
+        return document.getElementById(this._panel_contents).className.toString();
     }
 
-    // Can be pixels or percent
-    // Will never exceed map edge
+    /**
+    * Sets the width of panel, such that when added will never exceed map edge
+    * @param {(string|number)} width - string (can specify px or %), number (defaults to px)
+    */
     set width(width) {
 
         if (typeof width === "number") {
             document.getElementById(this._panel_contents).style.width = width.toString() + "px";
         }
+        //for strings without "px" or "%"" specifications
         else if (width.slice(-2) !== "px" && width.slice(-1) !== "%") {
             document.getElementById(this._panel_contents).style.width = width + "px";
         }
@@ -105,23 +117,26 @@ class Panel {
             document.getElementById(this._panel_contents).style.width = width;
         }
 
+        //if panel is added to map, check to see its not out of bounds
         if (this._map_added) {
             this.checkOutOfBounds();
         }
     }
 
-    //2 cases: panel is added to screen, can actually modify zIndex property of panel
-    //if zindex is defined BEFORE its added, need to make sure its set properly upon addition --> so in zindex added method.
-    //TODO: remove alert (only for testing purposes)
+    /**
+    * Sets the zindex of panel
+    * @param {number} zindex - the zindex value
+    */
     set zindex(zindex) {
         document.getElementById(this._panel_contents).style.zIndex = zindex;
-        alert("Z Index set to: " + zindex.toString());
+        alert("Z Index set to: " + zindex.toString());//TODO: remove alert
     }
 
-    // Can be pixels or percent
-    // Will never exceed map edge
+    /**
+    * Sets the height of panel, such that when added will never exceed map edge
+    * @param {(string|number)} height - string (can specify px or %), number (defaults to px)
+    */
     set height(height) {
-
         if (typeof height === "number") {
             document.getElementById(this._panel_contents).style.height = height.toString() + "px";
         }
@@ -137,13 +152,22 @@ class Panel {
         }
     }
 
-    //returns panel shell element
-    //introduces problem here where no real way to get panel shell unless HTML snippet is in a different file.
+    /**
+    * Returns panel shell element
+    * @return {jQuery<HTMLElement>} - shell element that holds controls and content of panel
+    */
     get element() {
         return document.getElementById(this._panel_contents);
+        //TODO: does it actually return jQuery<HTMLElement>?
     }
 
-    //position defined in numbers, need to be changed toString pixels
+    /**
+    * Position is relative to map's top and left iff no control object given, otherwise relative to controls
+    * @param {number} top - top position of panel in pixels
+    * @param {number} left - left position of panel in pixels
+    * @param {number} bottom - bottom position of panel in pixels
+    * @param {number} right - right position of panel in pixels
+    */
     position(top, left, bottom, right) {
         if (top != undefined) {
             document.getElementById(this._panel_contents).style.top = top.toString() + "px";
@@ -167,12 +191,14 @@ class Panel {
 
     }
 
-    //Auto sets width and height to 20% of parent div
-    //If position was out of bounds, autosets to default position (remember position ALWAYS IN PIXELS)
+    /**
+    * Auto sets width and height to 20% of parent div
+    * If position was out of bounds, autosets to default panel position.
+    */
     checkOutOfBounds() {
 
         if (document.getElementById(this._parent_id).clientHeight < document.getElementById(this._parent_id).scrollHeight) {
-            alert("Panel height too big: changing to 20%")
+            alert("Panel height too big: changing to 20%") //TODO: remove alerts
             document.getElementById(this._panel_contents).style.height = "20%"
         }
 
@@ -206,7 +232,11 @@ class Panel {
 
 class PanelElem {
 
-    //pregenerated id --> "pe and elemNum"
+    /**
+    * Constructs PanelElem objct
+    * @param {number} elemNum - number that specifies the number of the PanelElem on panel
+    *                           used for pregenerating PanelElem ids
+    */
     constructor(elemNum) {
         //this._visible = true;
         this._id = "pe" + elemNum.toString();
@@ -259,7 +289,7 @@ class PanelElem {
 }
 
 //Control buttons come with open/close for whole panel
-//set visible for each PanelElem OOHHHHHHHHHHH. 
+//set visible for each PanelElem OOHHHHHHHHHHH.
 class Btn extends PanelElem {
     set element(element) {
         throw "Exception: Btn Elements cannot be set!"
