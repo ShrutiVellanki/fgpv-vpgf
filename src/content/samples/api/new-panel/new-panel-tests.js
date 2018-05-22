@@ -1,18 +1,19 @@
 $.getScript('./panel-api.js', function () {
 
     var lightyear;
-    var text = "<p>My name is Buzzlightyear</p>";
+    var text = "<p>Text PanelElem</p>";
     //hidden make visible
     var htmlInput = $("#coolInput");
     //make visible
-    var htmlButton = $("#coolButton");
+    //var htmlButton = $("#coolButton");
     var panelElem1, panelElem2, panelElem3;
 
     $("#ConstructPanelElems").click(function () {
         panelElem1 = new PanelElem(1);
         panelElem2 = new PanelElem(2);
-        panelElem3 = new PanelElem(3);
-        $("#SetStringElem").prop('disabled', false);
+        panelElem3 = new Btn(3);
+        $("#SetStringElem").prop('disabled', false);      
+        $("#GetTextID").prop('disabled', false);   
     });
 
     $("#SetStringElem").click(function () {
@@ -23,15 +24,19 @@ $.getScript('./panel-api.js', function () {
     $("#SetInputElem").click(function () {
         panelElem2.element = htmlInput;
         $("#SetButtonElem").prop('disabled', false);
+        $("#SetVisibleInput").prop('disabled', false);
+        $("#SetInvisibleInput").prop('disabled', false);
+        $("#GetVisibleInput").prop('disabled', false);
     });
 
     $("#SetButtonElem").click(function () {
-        panelElem3.element = htmlButton;
+        panelElem3.text = "Btn Elem";
         $("#ConstructPanel").prop('disabled', false);
     });
 
     $("#ConstructPanel").click(function () {
-        lightyear = new Panel(1, "dummyMap", "Buzz Lightyear", "Ground Control");
+        var controls = new Control([]);
+        lightyear = new Panel(1, "dummyMap", "Buzz Lightyear", controls);
         //$("#GetControl").prop('disabled', false);
         $("#GetContent").prop('disabled', false);
         $("#GetID").prop('disabled', false);
@@ -40,6 +45,7 @@ $.getScript('./panel-api.js', function () {
         $("#SetWidth").prop('disabled', false);
         $("#SetHeight").prop('disabled', false);
         $("#SetContent").prop('disabled', false);
+        //$("#SetContentOverflow").prop('disabled', false);
         $("#SetPosition").prop('disabled', false);
         $("#AddPanel").prop('disabled', false);
         $("#SetPositionOverflow").prop('disabled', false);
@@ -108,8 +114,27 @@ $.getScript('./panel-api.js', function () {
 
     $("#SetContent").click(function () {
         lightyear.content = [panelElem1, panelElem2, panelElem3];
-        $("SetVisibleInput").prop('disabled', false);
-        $("SetVisibleButton").prop('disabled', false);
+        //$("SetVisibleInput").prop('disabled', false);
+    });
+
+    $("#SetVisibleInput").click(function () {
+        panelElem2.visible = true;
+    });
+
+    $("#SetInvisibleInput").click(function () {
+        panelElem2.visible = false;
+    });
+
+    $("#GetVisibleInput").click(function () {
+        alert(panelElem2.visible);
+    });
+    $("#GetTextID").click(function () {
+        alert(panelElem1.id);
+    });
+
+    $("#SetContentOverflow").click(function () {
+        //lightyear.content = [panelElem1, panelElem2, panelElem3];
+        //$("SetVisibleInput").prop('disabled', false);
     });
 
 });
