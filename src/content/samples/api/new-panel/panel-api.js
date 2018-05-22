@@ -7,16 +7,37 @@ class Control {
     */
     constructor(controls) {
 
+        //loop through controls array        
+            //add each id/element to this._id_dict (useful for find method)
+            //if typeof control is Btn
+                //if control.closeBtn is true then this._hasCloseBtn = true;
 
-        var openBtn = new Btn(0);
+        //if this._hasCloseBtn == false
+            //create closeBtn
+            //append to this._controls
+
+        var openBtn = new Btn(0, true);
         openBtn.text = "Close Panel";
-        //goes through controls and checks for if Btn Elem
-        //if Btn elem is boolean true
-        //if so:
-        this._array = [openBtn];
-        //if not: 
-        //this._control_array = controls + btnElem
+        $("#" + openBtn._id).click(function () {
+            if (document.getElementById(openBtn._id).innerHTML == "Close Panel") {
+                newPanel.close();
+            }
+            else {
+                newPanel.open();
+            }
+
+        });
     }
+
+    /**
+    * Finds a control by ID
+    * @param {string} id - the ID of the desired control
+    * @return {(PanelElem | undefined)} - the control if it exists, else undefined
+    */
+    find(id){
+        //return this._id_dict[id];
+    }
+
 }
 
 class Panel {
@@ -52,14 +73,14 @@ class Panel {
         document.getElementById("panelBody").id = this._panel_body;
         document.getElementById(this._panel_contents).className = pID;
 
-        //First empty existing controls
+        //First empty existing controls (prevents accidental overflow)
         $("#" + this._panel_controls).empty();
 
         //goes through controls and appends to panel controls! 
-        for (let elem of this._control._array) {
+        /*for (let elem of this._control._array) {
             $("#" + this._panel_controls).append(elem._element);
             $("#" + this._panel_controls).append("<br>");
-        }
+        }*/
 
         //set default widths and heights for panel
         this.width = "400px";
@@ -80,7 +101,7 @@ class Panel {
     * Opens panel body.
     */
     open() {
-        $("#" + this._panel_contents).show();
+        $("#" + this._panel_body).show();
         //document.getElementsByClassName("ClosePanel").innerHTML = "Close Panel";
     }
 
@@ -89,7 +110,7 @@ class Panel {
     * Closes panel body.
     */
     close() {
-        $("#" + this._panel_contents).hide();
+        $("#" + this._panel_body).hide();
         //document.getElementById("ClosePanel").innerHTML = "Open Panel";
 
     }
@@ -336,28 +357,55 @@ class PanelElem {
 
 }
 
-//Control buttons come with open/close for whole panel
 class Btn extends PanelElem {
-    set element(element) {
-        throw "Exception: Btn Elements cannot be set!"
-    }
 
-    //closeBtn: boolean?
+    /**
+    * Constructs Btn objct
+    * @param {number} elemNum - number that specifies the number of the PanelElem on panel
+    *                           used for pregenerating PanelElem ids
+    * @param {boolean} btnCloses - whether or not this Btn opens and closes the panel body
+    * @param {{string|SVG}} [toClose] - the string or image that is set when button needs to close panel
+    *                                 - only specified if this btnCloses is true
+    * 
+    */
+    constructor(elemNum, btnCloses) {        
+        super(elemNum);
+        this.closeBtn = btnCloses;
 
-    /*set icon(svg){
-        
-    }*/
-
-    set text(txt) {
         this._element = $.parseHTML('<button></button>');
         //checks if element is jquery object
         if (!this._element.jquery) {
             this._element = $(this._element);
         }
-
-        this._element.html(txt);
         this._element.attr('id', this._id);
+        //Btn elements (unlike PanelElems) are auto set --> helpful for changing visibility etc.
         this._element_set = true;
+
+    }
+
+    /**
+    * Throws an exception when the user tries to set an element for a Btn
+    * @param {number} element - the element that the user is trying to set
+    * @throws {Exception} - cannot set the element of a Btn (all Btns are HTML <button>)
+    */
+    set element(element) {
+        throw "Exception: Btn Elements cannot be set!"
+    }
+
+    /**
+    * Sets an icon for the Btn
+    * @param {SVG} svg - the icon to be set for the Btn
+    */
+    set icon(svg) {
+        this._element.appendChild(svg);
+    }
+
+    /**
+    * Sets text for the Btn
+    * @param {string} txt - the text to be set for the Btn
+    */
+    set text(txt) {
+        this._element.html(txt);
     }
 
     // the scope of this function will include both the Btn and Panel instance, so 

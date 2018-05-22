@@ -6,9 +6,33 @@ TODO:
 - Make Panel pretty [10:00 - 10:30]
   -pretty background + border
   -pretty background + border for each elem/new panel added
+  -User defined IDs? Btn, PanelElem etc. 
 - Figure out how to separate PanelElem and Button Elem [10:30 - 11:30]
 - Get open/close button of panel as first control (+/-) [11:30 - 2:00] (Pod meeting)
-- Embed open/close button in panel elem (eye open/close) [2:00 - 4:00]
+
+-Test SVG icon Btn for SVG objects --> ask Miles to verify what he means by "SVG Object"
+
+
+Problem: -should Btns have a function option? Should they be in Controls?
+         -esp if they are controls, would be helpful for them to refer to the panel instance they are in
+          to control the behaviour of the panel 
+         -user is defining functions of Btns, PanelElems, Panels
+         -So Btns, PanelElems, Panels in Panel Body --> would probably have nothing to do with panel itself --> showcasing external data
+            -functions wouldn't need to be defined for these?
+        -Well Panels, Btns and PanelElems are all HTMLElements so if user wants to define their function    
+            -They could just get ID
+            -get element by ID
+            -Do something like onclick blah blah
+        
+        -For my open/close button --> Once panel is constructed all the buttons will be "on screen"
+        -At that point getElementById for open/close button
+            --> btn.onclick:
+                open if "Open Text"
+                close if "Close Text" 
+        -if you're changing object ID in Panel Constructor --> change the attribute for the PanelElem  or Btn
+            -remember user only gets ID from class name
+
+
 
 *********************************************************************************************************
 

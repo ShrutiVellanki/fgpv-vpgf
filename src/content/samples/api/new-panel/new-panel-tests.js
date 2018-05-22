@@ -4,9 +4,8 @@ $.getScript('./panel-api.js', function () {
     var text = "<p>My name is Buzzlightyear</p>";
     //hidden make visible
     var htmlInput = $("#coolInput");
-    //make visible
-    var htmlButton = $("#coolButton");
     var panelElem1, panelElem2, panelElem3;
+    var button = new Btn(4, false);
 
     $("#ConstructPanelElems").click(function () {
         panelElem1 = new PanelElem(1);
