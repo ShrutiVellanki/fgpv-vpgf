@@ -1,42 +1,24 @@
+$('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', './new-panel-styles.css') );
+
 $.getScript('./panel-api.js', function () {
 
     var lightyear;
-    var text = "<p>Text PanelElem</p>";
+    var text = "<p>Text PanelElem</p><h2></h2>";
     //hidden make visible
     var htmlInput = $("#coolInput");
-    //make visible
-    //var htmlButton = $("#coolButton");
-    var panelElem1, panelElem2, panelElem3;
+    var panelElem1, panelElem2 /*, panelElem3*/;
+    //var button = new Btn(4, false);
 
     $("#ConstructPanelElems").click(function () {
-        panelElem1 = new PanelElem(1);
-        panelElem2 = new PanelElem(2);
-        panelElem3 = new Btn(3);
-        $("#SetStringElem").prop('disabled', false);      
-        $("#GetTextID").prop('disabled', false);   
-    });
-
-    $("#SetStringElem").click(function () {
-        panelElem1.element = text;
-        $("#SetInputElem").prop('disabled', false);
-    });
-
-    $("#SetInputElem").click(function () {
-        panelElem2.element = htmlInput;
-        $("#SetButtonElem").prop('disabled', false);
-        $("#SetVisibleInput").prop('disabled', false);
-        $("#SetInvisibleInput").prop('disabled', false);
-        $("#GetVisibleInput").prop('disabled', false);
-    });
-
-    $("#SetButtonElem").click(function () {
-        panelElem3.text = "Btn Elem";
+        panelElem1 = new PanelElem("<p>Text PanelElem</p>");
+        panelElem2 = new PanelElem(htmlInput);
         $("#ConstructPanel").prop('disabled', false);
     });
 
+    
     $("#ConstructPanel").click(function () {
-        var controls = new Control([]);
-        lightyear = new Panel(1, "dummyMap", "Buzz Lightyear", controls);
+        //var controls = new Control([]);
+        lightyear = new Panel("Buzz Lightyear", "Ground Control");
         //$("#GetControl").prop('disabled', false);
         $("#GetContent").prop('disabled', false);
         $("#GetID").prop('disabled', false);
@@ -54,10 +36,10 @@ $.getScript('./panel-api.js', function () {
     });
 
     //TODO: actual Control object.
-    $("#GetControl").click(function () {
+    /*$("#GetControl").click(function () {
         alert(lightyear.control);
         console.log(lightyear.control);
-    });
+    });*/
 
     $("#GetID").click(function () {
         alert(lightyear.id);
@@ -104,7 +86,7 @@ $.getScript('./panel-api.js', function () {
     });
 
     $("#AddPanel").click(function () {
-        lightyear.addPanel();
+        lightyear.addPanel("dummyMap");
     });
 
     $("#GetContent").click(function () {
@@ -113,21 +95,21 @@ $.getScript('./panel-api.js', function () {
     });
 
     $("#SetContent").click(function () {
-        lightyear.content = [panelElem1, panelElem2, panelElem3];
-        //$("SetVisibleInput").prop('disabled', false);
+        lightyear.content = [panelElem1, panelElem2];
+        $("#SetVisibleInput").prop('disabled', false);
+        $("#SetInvisibleInput").prop('disabled', false);
     });
 
     $("#SetVisibleInput").click(function () {
         panelElem2.visible = true;
+        alert(panelElem2.visible);
     });
 
     $("#SetInvisibleInput").click(function () {
         panelElem2.visible = false;
-    });
-
-    $("#GetVisibleInput").click(function () {
         alert(panelElem2.visible);
     });
+
     $("#GetTextID").click(function () {
         alert(panelElem1.id);
     });

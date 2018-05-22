@@ -1,78 +1,119 @@
-class Control {
+// class Control {
 
-    /**
-    * Creates a new Controls object.
-    * @constructor Controls
-    * @param {(PanelElem)[]} controls - the array of PanelElems to be used as panel controls
-    */
-    constructor(controls) {
+//     /**
+//     * Creates a new Controls object.
+//     * @constructor Controls
+//     * @param {(PanelElem)[]} controls - the array of PanelElems to be used as panel controls
+//     */
+//     constructor(controls) {
+//         this._id_dict = {};
+//         //loop through controls array
+//         for (let control of controls){
+//             var id = control._id
+//         }        
+//             //add each id/element to this._id_dict (useful for find method)
+//             //if typeof control is Btn
+//                 //if control.closeBtn is true then this._hasCloseBtn = true;
 
+//         //if this._hasCloseBtn == false
+//             //create closeBtn
+//             //append to this._controls
 
-        var openBtn = new Btn(0);
-        openBtn.text = "Close Panel";
-        //goes through controls and checks for if Btn Elem
-        //if Btn elem is boolean true
-        //if so:
-        this._array = [openBtn];
-        //if not: 
-        //this._control_array = controls + btnElem
-    }
-}
+//         var openBtn = new Btn(0, true);
+//         openBtn.text = "Close Panel";
+//         $("#" + openBtn._id).click(function () {
+//             if (document.getElementById(openBtn._id).innerHTML == "Close Panel") {
+//                 newPanel.close();
+//             }
+//             else {
+//                 newPanel.open();
+//             }
+
+//         });
+//     }
+
+//     /**
+//     * Finds a control by ID
+//     * @param {string} id - the ID of the desired control
+//     * @return {(PanelElem | undefined)} - the control if it exists, else undefined
+//     */
+//     find(id){
+//         //return this._id_dict[id];
+//     }
+
+// }
 
 class Panel {
 
     /**
     * Creates a new Panel.
-    * @constructor Panel
-    * @param {number} panelCount - the number of panels (including this one) there are on the map instance
-    * @param {string} parentID - the parentID of this panel (usually the map instance where panel sits)
-    * @param {(string|number)} [pID] - the user defined ID name for this panel
+    * @constructor
+    * @param {(string|number)} [id] - the user defined ID name for this panel
     * @param {Control} [control] - the user defined controls for this panel
     */
-    constructor(panelCount, parentID, pID = undefined, control = undefined) {
+    constructor(id = undefined, control = undefined) {
 
-        //init attributes
+        //init class attributes
         this._map_added = false;
-        this._parent_id = parentID;
+        this._id = id;
         this._control = control;
         this._content = [];
+        this._panel_contents, this._panel_controls, this._panel_body;
+        this._document_fragment;
+        this._visible;
+        this._width, this._height;
+        this._zindex;
+        this._position_top = "0px", this._position_right, this._position_bottom, this._position_left = "0px";
+        this._parent_map,  this._parent_map_jq; //HTML + JQuery versions of parent map 
 
-        //Box design credit: https://codepen.io/deam0n/pen/RRzmjq
-        var panelSnippet = '<div hidden id ="panelContents" style="background: #F2F2F2; border: 1px solid #ccc; box-shadow: 1px 1px 2px #fff inset, -1px -1px 2px #fff inset; margin: 10px; position:relative; top:0px; left:0px"><div id ="panelControls" style="border: 1px solid #ccc;"></div><div id = "panelBody"></div></div>';
-        $("#" + this._parent_id).append(panelSnippet);
+        //create panel components and document fragment
+        this.createPanelComponents();
 
-        //panel template's div IDs can now be referred to by panelCount
-        this._panel_contents = "panelContents" + panelCount.toString();
-        this._panel_controls = "panelControls" + panelCount.toString();
-        this._panel_body = "panelBody" + panelCount.toString();
-
-        //update panel template's div IDs,
-        document.getElementById("panelContents").id = this._panel_contents;
-        document.getElementById("panelControls").id = this._panel_controls;
-        document.getElementById("panelBody").id = this._panel_body;
-        document.getElementById(this._panel_contents).className = pID;
-
-        //First empty existing controls
-        $("#" + this._panel_controls).empty();
-
-        //goes through controls and appends to panel controls! 
-        for (let elem of this._control._array) {
-            $("#" + this._panel_controls).append(elem._element);
-            $("#" + this._panel_controls).append("<br>");
-        }
-
-        //set default widths and heights for panel
+        //set default height and width
         this.width = "400px";
         this.height = "auto";
 
     }
 
     /**
-    * Adds panel to the map.
+    * Helper method to create panel components and the document fragment. 
     */
-    addPanel() {
-        $("#" + this._panel_contents).removeAttr('hidden');
+    createPanelComponents() {
+
+        //create panel components
+        this._panel_contents = $.parseHTML('<div class="panel-contents"></div>');
+        this._panel_controls = $.parseHTML('<div class="panel-controls"></div>');
+        this._panel_body = $.parseHTML('<div class="panel-body"></div>');
+
+        //convert to jQuery elements
+        this._panel_contents = $(this._panel_contents);
+        this._panel_controls = $(this._panel_controls);
+        this._panel_body = $(this._panel_body);
+
+        this._panel_contents.id = this._id;
+
+        //append panel controls/body to panel contents ("shell")
+        this._panel_contents.append(this._panel_controls);
+        this._panel_contents.append(this._panel_body);
+
+        //append panel contents ("shell") to document fragment
+        this._document_fragment = document.createDocumentFragment();
+        this._document_fragment.append(this._panel_contents);
+
+    }
+
+    /**
+    * Adds panel to the map.
+    * @param {string} [parentID] - the id of the parent (map object) where the panel shows up
+    */
+    addPanel(parentID) {
         this._map_added = true;
+
+        //javascript and jquery calls to parent object
+        this._parent_map = document.getElementById(parentID);
+        this._parent_map_jq = $("#" + parentID);
+
+        this._parent_map_jq.append(this._panel_contents);
         this.checkOutOfBounds(); //check if added map is out of bounds
     }
 
@@ -80,8 +121,7 @@ class Panel {
     * Opens panel body.
     */
     open() {
-        $("#" + this._panel_contents).show();
-        //document.getElementsByClassName("ClosePanel").innerHTML = "Close Panel";
+        this._panel_body.show();
     }
 
 
@@ -89,9 +129,7 @@ class Panel {
     * Closes panel body.
     */
     close() {
-        $("#" + this._panel_contents).hide();
-        //document.getElementById("ClosePanel").innerHTML = "Open Panel";
-
+        this._panel_body.hide();
     }
 
     /**
@@ -118,12 +156,12 @@ class Panel {
         this._content = content;
 
         //First empty existing content
-        $("#" + this._panel_body).empty();
+        this._panel_body.empty();
 
         //then fill in new contents
         for (let elem of content) {
-            $("#" + this._panel_body).append(elem._element);
-            $("#" + this._panel_body).append('<br>');
+            this._panel_body.append(elem._element);
+            this._panel_body.append('<br>');
         }
 
         //check if content makes panel height too big
@@ -135,7 +173,7 @@ class Panel {
     * @return {string} - the id of the panel, if set
     */
     get id() {
-        return document.getElementById(this._panel_contents).className.toString();
+        return this._id;
     }
 
     /**
@@ -145,14 +183,14 @@ class Panel {
     set width(width) {
 
         if (typeof width === "number") {
-            document.getElementById(this._panel_contents).style.width = width.toString() + "px";
+            this._panel_contents.css('width', width.toString() + "px");
         }
         //for strings without "px" or "%"" specifications
         else if (width.slice(-2) !== "px" && width.slice(-1) !== "%") {
-            document.getElementById(this._panel_contents).style.width = width + "px";
+            this._panel_contents.css('width', width + "px");
         }
         else {
-            document.getElementById(this._panel_contents).style.width = width;
+            this._panel_contents.css('width', width);
         }
 
         //if panel is added to map, check to see its not out of bounds
@@ -166,8 +204,9 @@ class Panel {
     * @param {number} zindex - the zindex value
     */
     set zindex(zindex) {
-        document.getElementById(this._panel_contents).style.zIndex = zindex;
+        this._panel_contents.css('zIndex', zindex);
         alert("Z Index set to: " + zindex.toString());//TODO: remove alert
+        this._zindex = zindex;
     }
 
     /**
@@ -176,17 +215,22 @@ class Panel {
     */
     set height(height) {
         if (typeof height === "number") {
-            document.getElementById(this._panel_contents).style.height = height.toString() + "px";
+            this._panel_contents.css('height', height.toString() + "px");
+            this._height = height.toString() + "px";
         }
         else if (height.slice(-2) !== "px" && height.slice(-1) !== "%") {
-            document.getElementById(this._panel_contents).style.height = height + "px";
+            this._panel_contents.css('height', height + "px");
+            this._height = height + "px";
         }
         else {
-            document.getElementById(this._panel_contents).style.height = height;
+            this._panel_contents.css('height', height);
+            this._height = height;
         }
-
+        
         if (this._map_added) {
+            //the height at the end of call to checkOutOfBounds is final map height
             this.checkOutOfBounds();
+
         }
     }
 
@@ -195,8 +239,7 @@ class Panel {
     * @return {jQuery<HTMLElement>} - shell element that holds controls and content of panel
     */
     get element() {
-        return document.getElementById(this._panel_contents);
-        //TODO: does it actually return jQuery<HTMLElement>?
+        return this._panel_contents;
     }
 
     /**
@@ -208,19 +251,23 @@ class Panel {
     */
     position(top, left, bottom, right) {
         if (top != undefined) {
-            document.getElementById(this._panel_contents).style.top = top.toString() + "px";
+            this._panel_contents.css('top', top.toString() + "px");
+            this._position_top = top.toString() + "px";
         }
 
         if (left != undefined) {
-            document.getElementById(this._panel_contents).style.left = left.toString() + "px";
+            this._panel_contents.css('left', left.toString() + "px");
+            this._position_left = left.toString() + "px";
         }
 
         if (right != undefined) {
-            document.getElementById(this._panel_contents).style.right = right.toString() + "px";
+            this._panel_contents.css('right', right.toString() + "px");
+            this._position_right = right.toString() + "px";
         }
 
         if (bottom != undefined) {
-            document.getElementById(this._panel_contents).style.bottom = bottom.toString() + "px";
+            this._panel_contents.css('bottom', bottom.toString() + "px");
+            this._position_bottom = bottom.toString() + "px";
         }
 
         if (this._map_added) {
@@ -230,28 +277,31 @@ class Panel {
     }
 
     /**
+    * Helper Method: Checks to see if the panel is out of bounds of its _parent_map
     * Auto sets width and height to 20% of parent div
     * If position was out of bounds, autosets to default panel position.
     */
     checkOutOfBounds() {
 
-        if (document.getElementById(this._parent_id).clientHeight < document.getElementById(this._parent_id).scrollHeight) {
+        if (this._parent_map.clientHeight < this._parent_map.scrollHeight) {
             alert("Panel height too big: changing to 20%") //TODO: remove alerts
-            document.getElementById(this._panel_contents).style.height = "20%"
+            this._panel_contents.css('height', '20%');
+            this._height = '20%';
         }
 
-        if (document.getElementById(this._parent_id).clientWidth < document.getElementById(this._parent_id).scrollWidth) {
+        if (this._parent_map.clientWidth < this._parent_map.scrollWidth) {
             alert("Panel width too big: changing to 20%")
-            document.getElementById(this._panel_contents).style.width = "20%"
+            this._panel_contents.css('width', '20%');
+            this._width = '20%';
         }
 
-        var parent_position = $("#" + this._parent_id).position();
+        var parent_position = this._parent_map_jq.position();
         var pt = parent_position.top; //"parent top"
         var pl = parent_position.left;
         var pr = parent_position.right;
         var pb = parent_position.bottom;
 
-        var panel_position = $("#" + this._panel_contents).position();
+        var panel_position = this._panel_contents.position();
         var ct = panel_position.top; //"child top"
         var cl = panel_position.left;
         var cr = panel_position.right;
@@ -261,9 +311,13 @@ class Panel {
         //"if the top, left of child less then parent OR bottom, right of child greater than parent"
         if (ct < pt || cl < pl || cr > pr || cb > pb) {
             alert("Panel position out of bounds: changing to default")
-            document.getElementById(this._panel_contents).style.top = "0px";
-            document.getElementById(this._panel_contents).style.left = "0px";
+            this._panel_contents.css('top', '0px');
+            this._panel_contents.css('left', '0px');
+            this._position_top = '0px';
+            this._position_bottom = '0px';
         }
+
+        
     }
 
 }
@@ -271,19 +325,24 @@ class Panel {
 class PanelElem {
 
     /**
-    * Constructs PanelElem objct
-    * @param {number} elemNum - number that specifies the number of the PanelElem on panel
-    *                           used for pregenerating PanelElem ids
+    * Constructs PanelElem object
+    * @param {string | HTMLElement | jQuery<HTMLElement>} element - element to be set as PanelElem
     */
-    constructor(elemNum) {
-        this._id = "pe" + elemNum.toString();
-        this._element_set = false;
+    constructor(element) {
+
+        this.element = element; 
+        this._id = "PanelElem" + Math.round(Math.random() * 10000).toString(); //random id autogenerated
+        this._visible = this._element.is(':visible');
+
+        //2. Set element and append to document fragment.
+        this._document_fragment = document.createDocumentFragment();
+        this._document_fragment.append(this._element);
     }
 
     /**
-    * Constructs PanelElem objct
-    * @param {number} elemNum - number that specifies the number of the PanelElem on panel
-    *                           used for pregenerating PanelElem ids
+    * Sets PanelElem object
+    * @param {(string | HTMLElement | jQuery<HTMLElement>)} element - element to be set as PanelElem
+    * @throws {Exception} - cannot have multiple top level elements
     */
     set element(element) {
 
@@ -294,73 +353,118 @@ class PanelElem {
             this._element = element;
         }
 
-        //checks if element is jquery object
+        //checks if element is jQuery object
         if (!this._element.jquery) {
             this._element = $(this._element);
         }
 
-        this._element.attr('id', this._id);
-        this._element.css('padding-bottom', "3px");
-        this._element.css('border-bottom', "white solid 1px");
+        //If element already has id attribute, set id to that id
+        if (this._element !== undefined && this._element.attr('id') !== undefined) {
+            this._id = this._element.attr('id');
+        }
 
-        this._element_set = true;
+        //Throw exception if there's multiple top level elements
+        //TODO: Check. https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_prop_length
+        if (this._element.length !== this._element.children().length + 1) {
+            console.log("oops");
+            throw "Exception: Cannot have multiple top level elements!";
+        }
+
+        //Adds elem style from stylesheet 
+        this._element.addClass("elem");
+
     }
 
     //visibility can only be changed once element is set (otherwise gets too complicated)
     set visible(visible) {
 
-        console.log('hello');
+        if (this._element != undefined && visible == false) {
 
-        if (this._element_set == true && visible == false) {
-            this._element.css('visibility', 'hidden');
+            //Adds style from stylesheet
+            this._element.addClass("unseen");
+            this._element.removeClass("elem");
             this._element.hide();
+            this._visible = false;
         }
-        else if (this._element_set == true && visible == true) {
-            this._element.css('visibility', 'visible');
-            this._element.css('padding-bottom', "3px");
-            this._element.css('border-bottom', "white solid 1px");
-            this._element.show();
-        }
+        else if (this._element != undefined && visible == true) {
 
+            //Adds styles from stylesheet
+            this._element.addClass("seen");
+            this._element.addClass("elem");
+
+            this._element.show();
+            this._visible = true;
+        }
 
     }
 
     //get visibility can only be called once element is set
     get visible() {
-        return this._element.is(':visible');
+        return this._visible;
     }
 
     get id() {
         return this._id;
     }
 
-}
-
-//Control buttons come with open/close for whole panel
-class Btn extends PanelElem {
-    set element(element) {
-        throw "Exception: Btn Elements cannot be set!"
+    get fragment() {
+        return this._document_fragment;
     }
 
-    //closeBtn: boolean?
-
-    /*set icon(svg){
-        
-    }*/
-
-    set text(txt) {
-        this._element = $.parseHTML('<button></button>');
-        //checks if element is jquery object
-        if (!this._element.jquery) {
-            this._element = $(this._element);
-        }
-
-        this._element.html(txt);
-        this._element.attr('id', this._id);
-        this._element_set = true;
-    }
-
-    // the scope of this function will include both the Btn and Panel instance, so 
-    // this.panel.close() or this.visible = false is valid.
-    //action: (evt: Event) => void; // on click or enter keypress when focused
 }
+
+// class Btn extends PanelElem {
+
+//     /**
+//     * Constructs Btn objct
+//     * @param {number} elemNum - number that specifies the number of the PanelElem on panel
+//     *                           used for pregenerating PanelElem ids
+//     * @param {boolean} btnCloses - whether or not this Btn opens and closes the panel body
+//     * @param {{string|SVG}} [toClose] - the string or image that is set when button needs to close panel
+//     *                                 - only specified if this btnCloses is true
+//     * 
+//     */
+//     constructor(elemNum, btnCloses) {        
+//         super(elemNum);
+//         this.closeBtn = btnCloses;
+
+//         this._element = $.parseHTML('<button></button>');
+//         //checks if element is jquery object
+//         if (!this._element.jquery) {
+//             this._element = $(this._element);
+//         }
+//         this._element.attr('id', this._id);
+//         //Btn elements (unlike PanelElems) are auto set --> helpful for changing visibility etc.
+//         this._element_set = true;
+
+//     }
+
+//     /**
+//     * Throws an exception when the user tries to set an element for a Btn
+//     * @param {number} element - the element that the user is trying to set
+//     * @throws {Exception} - cannot set the element of a Btn (all Btns are HTML <button>)
+//     */
+//     set element(element) {
+//         throw "Exception: Btn Elements cannot be set!";
+//     }
+
+//     /**
+//     * Sets an icon for the Btn
+//     * @param {SVG} svg - the icon to be set for the Btn
+//     */
+//     set icon(svg) {
+//         this._element.appendChild(svg);
+//     }
+
+//     /**
+//     * Sets text for the Btn
+//     * @param {string} txt - the text to be set for the Btn
+//     */
+//     set text(txt) {
+//         this._element.html(txt);
+//     }
+
+//     // the scope of this function will include both the Btn and Panel instance, so 
+//     // this.panel.close() or this.visible = false is valid.
+//     //action: (evt: Event) => void; // on click or enter keypress when focused
+// }
