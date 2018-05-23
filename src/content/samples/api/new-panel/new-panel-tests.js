@@ -3,14 +3,15 @@ $('head').append( $('<link rel="stylesheet" type="text/css" />').attr('href', '.
 $.getScript('./panel-api.js', function () {
 
     var lightyear;
-    var text = "<p>Text PanelElem</p><h2></h2>";
+    var text = "<p>Text PanelElem<span></span></p>"; //to test for multiple top level elements var text = "<p>Text PanelElem</p><h2></h2>";
     //hidden make visible
     var htmlInput = $("#coolInput");
     var panelElem1, panelElem2 /*, panelElem3*/;
     //var button = new Btn(4, false);
 
+   
     $("#ConstructPanelElems").click(function () {
-        panelElem1 = new PanelElem("<p>Text PanelElem</p>");
+        panelElem1 = new PanelElem(text);
         panelElem2 = new PanelElem(htmlInput);
         $("#ConstructPanel").prop('disabled', false);
     });

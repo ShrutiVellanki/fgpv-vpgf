@@ -3,7 +3,9 @@ TODO TOMORROW MORNING (May 22):
 -Final Runthrough of changes
 -Check with console.log
 
-
+Problem: 
+-uncaught TypeError cannot read clientHeight of undefined? watch out
+-if set content and set element visible before addPanel, shows up as invisible
 
 TODO:
 - Figure out how to add Panels as Panel contents [9:00 - 10:00]
