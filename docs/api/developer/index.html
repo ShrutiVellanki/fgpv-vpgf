@@ -3,17 +3,17 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LegendStructure | r2v2</title>
+	<title>r2v2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
 <header>
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">r2v2</a>
+					<a href="index.html" class="title">r2v2</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -53,138 +53,117 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
-				</li>
-				<li>
-					<a href="../modules/_api_src_map_.html">&quot;api/src/map&quot;</a>
-				</li>
-				<li>
-					<a href="_api_src_map_.legendstructure.html">LegendStructure</a>
+					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1>Interface LegendStructure</h1>
+			<h1> r2v2</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
-			<section class="tsd-panel tsd-hierarchy">
-				<h3>Hierarchy</h3>
-				<ul class="tsd-hierarchy">
-					<li>
-						<span class="target">LegendStructure</span>
+			<div class="tsd-panel tsd-typography">
+				<h1 id="fgpv-vpgf">fgpv-vpgf</h1>
+				<p><a href="https://gitter.im/fgpv-vpgf/fgpv-vpgf?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://img.shields.io/badge/GITTER-join%20chat-green.svg?style=flat-square" alt="Join the chat at https://gitter.im/fgpv-vpgf/fgpv-vpgf"></a></p>
+				<p><a href="https://codeclimate.com/github/fgpv-vpgf/fgpv-vpgf"><img src="https://codeclimate.com/github/fgpv-vpgf/fgpv-vpgf/badges/gpa.svg" alt="Code Climate"></a>
+				<a href="https://codeclimate.com/github/fgpv-vpgf/fgpv-vpgf"><img src="https://codeclimate.com/github/fgpv-vpgf/fgpv-vpgf/badges/issue_count.svg" alt="Issue Count"></a></p>
+				<p><a href="https://david-dm.org/fgpv-vpgf/fgpv-vpgf"><img src="https://david-dm.org/fgpv-vpgf/fgpv-vpgf.svg?style=flat-square" alt="Dependency Status"></a>
+				<a href="https://david-dm.org/fgpv-vpgf/fgpv-vpgf#info=devDependencies"><img src="https://david-dm.org/fgpv-vpgf/fgpv-vpgf/dev-status.svg?style=flat-square" alt="devDependency Status"></a></p>
+				<p>Federal Geospatial Platform Visualiser / Visualisateur pour la Plateforme géospatiale fédérale</p>
+				<h2 id="getting-started">Getting Started</h2>
+				<p>Requirements:</p>
+				<ul>
+					<li><a href="https://nodejs.org/">NodeJS</a></li>
+				</ul>
+				<p>Running a local build:</p>
+				<ol>
+					<li>Checkout the repo</li>
+					<li>Switch to the develop branch (master is for stable, released code)</li>
+					<li>Run <code>npm install</code> to install dependencies</li>
+					<li>Run <code>npm run serve</code> to build and launch a dev server</li>
+				</ol>
+				<p>We use a fork and pull model for contributions, see our <a href="https://github.com/fgpv-vpgf/fgpv-vpgf/blob/develop/CONTRIBUTING.md">contributing guidelines</a> for more details.</p>
+				<h3 id="interactive-schema-documentation"><a href="https://fgpv-vpgf.github.io/schema-to-docs/">Interactive Schema Documentation</a></h3>
+				<h3 id="generating-local-builds">Generating Local Builds</h3>
+				<ul>
+					<li><p><code>npm run build</code></p>
+						<p>  Builds development code and places it in the <code>build</code> directory. Performs eslint, SASS -&gt; CSS, and babel compilation</p>
+					</li>
+					<li><p><code>npm run build -- --env.prod</code></p>
+						<p>  Builds production code and places it in the <code>build</code> directory. Performs same steps as development builds, but also places a zipped file of the build in the <code>dist</code> directory.</p>
 					</li>
 				</ul>
-			</section>
-			<section class="tsd-panel-group tsd-index-group">
-				<h2>Index</h2>
-				<section class="tsd-panel tsd-index-panel">
-					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_api_src_map_.legendstructure.html#json" class="tsd-kind-icon">JSON</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_api_src_map_.legendstructure.html#type" class="tsd-kind-icon">type</a></li>
-							</ul>
-						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="json" class="tsd-anchor"></a>
-					<h3>JSON</h3>
-					<div class="tsd-signature tsd-kind-icon">JSON<span class="tsd-signature-symbol">:</span> <a href="_api_src_map_.legendjson.html" class="tsd-signature-type">LegendJSON</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/map.ts#L337">api/src/map.ts:337</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/map.ts#L336">api/src/map.ts:336</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
+				<h3 id="serving-development-code">Serving Development Code</h3>
+				<ul>
+					<li><p><code>npm run serve</code></p>
+						<p>  Serves the development code. Reloads on file change.</p>
+					</li>
+					<li><p><code>npm run serve -- --env.prod</code></p>
+						<p>  Serves the production code. Reloads on file change.</p>
+					</li>
+				</ul>
+				<h3 id="inspecting-bundle-dependencies">Inspecting Bundle Dependencies</h3>
+				<p>Run <code>npm run build -- --env.inspect</code></p>
+				<p>When complete, navigate to <a href="http://127.0.0.1:8888">http://127.0.0.1:8888</a> in chrome.</p>
+				<p>You can also use two external tools with the <code>build/stats.json</code> file</p>
+				<pre><code>-<span class="ruby"> <span class="hljs-symbol">http:</span>/<span class="hljs-regexp">/webpack.github.io/analyse</span>
+</span>-<span class="ruby"> <span class="hljs-symbol">https:</span>/<span class="hljs-regexp">/chrisbateman.github.io/webpack</span>-visualizer/</span>
+</code></pre><h3 id="optional-flags">Optional Flags</h3>
+				<p>To run these flags, prefix with <code>--</code> then <code>--env.</code> as in <code>npm run serve -- --env.prod</code> where <code>prod</code> is a flag.</p>
+				<ul>
+					<li><p><code>geoLocal</code>
+						Replaces geoApi from npm node_module with a local geoApi repo folder located by ../geoApi</p>
+					</li>
+					<li><p><code>geoLocal=&quot;path/to/geoApi&quot;</code>
+						Same as no argument <code>geoLocal</code> but uses the provided path to local folder</p>
+					</li>
+					<li><p><code>useMap</code>
+						Creates full independent source maps files for <code>development</code> code only. Build time will increase.</p>
+					</li>
+				</ul>
+			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
 					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Internals</span>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_src_events_.html">"api/src/events"</a>
+						<a href="modules/_api_src_events_.html">"api/src/events"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_src_geometry_.html">"api/src/geometry"</a>
+						<a href="modules/_api_src_geometry_.html">"api/src/geometry"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_src_layers_.html">"api/src/layers"</a>
-					</li>
-					<li class="current tsd-kind-external-module">
-						<a href="../modules/_api_src_map_.html">"api/src/map"</a>
+						<a href="modules/_api_src_layers_.html">"api/src/layers"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_src_panel_.html">"api/src/panel"</a>
+						<a href="modules/_api_src_map_.html">"api/src/map"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_api_src_ui_.html">"api/src/ui"</a>
+						<a href="modules/_api_src_panel_.html">"api/src/panel"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_api_src_ui_.html">"api/src/ui"</a>
 					</li>
 					<li class="label tsd-is-external">
 						<span>Externals</span>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="../modules/_src_app_app_seed_.html">"src/app/app-<wbr>seed"</a>
+						<a href="modules/_src_app_app_seed_.html">"src/app/app-<wbr>seed"</a>
 					</li>
 					<li class=" tsd-kind-external-module tsd-is-external">
-						<a href="../modules/_src_app_startup_.html">"src/app/startup"</a>
+						<a href="modules/_src_app_startup_.html">"src/app/startup"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_api_src_map_.map.html" class="tsd-kind-icon">Map</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_map_.entrygroupjson.html" class="tsd-kind-icon">Entry<wbr>GroupJSON</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_map_.legendjson.html" class="tsd-kind-icon">LegendJSON</a>
-					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_map_.legendstructure.html" class="tsd-kind-icon">Legend<wbr>Structure</a>
-						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_api_src_map_.legendstructure.html#json" class="tsd-kind-icon">JSON</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_api_src_map_.legendstructure.html#type" class="tsd-kind-icon">type</a>
-							</li>
-						</ul>
-					</li>
-				</ul>
-				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_api_src_map_.html#initobservables" class="tsd-kind-icon">init<wbr>Observables</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_api_src_map_.html#isconfigschema" class="tsd-kind-icon">is<wbr>Config<wbr>Schema</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
@@ -253,7 +232,7 @@
 	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
-<script src="../assets/js/main.js"></script>
-<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

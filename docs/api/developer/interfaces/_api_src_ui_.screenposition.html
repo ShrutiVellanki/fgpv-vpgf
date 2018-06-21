@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>LegendStructure | r2v2</title>
+	<title>ScreenPosition | r2v2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_api_src_map_.html">&quot;api/src/map&quot;</a>
+					<a href="../modules/_api_src_ui_.html">&quot;api/src/ui&quot;</a>
 				</li>
 				<li>
-					<a href="_api_src_map_.legendstructure.html">LegendStructure</a>
+					<a href="_api_src_ui_.screenposition.html">ScreenPosition</a>
 				</li>
 			</ul>
-			<h1>Interface LegendStructure</h1>
+			<h1>Interface ScreenPosition</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">LegendStructure</span>
+						<span class="target">ScreenPosition</span>
 					</li>
 				</ul>
 			</section>
@@ -84,8 +84,8 @@
 						<section class="tsd-index-section tsd-is-not-exported">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_api_src_map_.legendstructure.html#json" class="tsd-kind-icon">JSON</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_api_src_map_.legendstructure.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_api_src_ui_.screenposition.html#x" class="tsd-kind-icon">x</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported"><a href="_api_src_ui_.screenposition.html#y" class="tsd-kind-icon">y</a></li>
 							</ul>
 						</section>
 					</div>
@@ -94,22 +94,22 @@
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="json" class="tsd-anchor"></a>
-					<h3>JSON</h3>
-					<div class="tsd-signature tsd-kind-icon">JSON<span class="tsd-signature-symbol">:</span> <a href="_api_src_map_.legendjson.html" class="tsd-signature-type">LegendJSON</a></div>
+					<a name="x" class="tsd-anchor"></a>
+					<h3>x</h3>
+					<div class="tsd-signature tsd-kind-icon">x<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/map.ts#L337">api/src/map.ts:337</a></li>
+							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L566">api/src/ui.ts:566</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="y" class="tsd-anchor"></a>
+					<h3>y</h3>
+					<div class="tsd-signature tsd-kind-icon">y<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/map.ts#L336">api/src/map.ts:336</a></li>
+							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L567">api/src/ui.ts:567</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -133,13 +133,13 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_src_layers_.html">"api/src/layers"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_src_map_.html">"api/src/map"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_src_panel_.html">"api/src/panel"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_api_src_ui_.html">"api/src/ui"</a>
 					</li>
 					<li class="label tsd-is-external">
@@ -155,35 +155,50 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../classes/_api_src_ui_.basepanel.html" class="tsd-kind-icon">Base<wbr>Panel</a>
+					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_api_src_map_.map.html" class="tsd-kind-icon">Map</a>
+						<a href="../classes/_api_src_ui_.basemap.html" class="tsd-kind-icon">Basemap</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_api_src_ui_.basemapgroup.html" class="tsd-kind-icon">Basemap<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_api_src_ui_.panel.html" class="tsd-kind-icon">Panel</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_api_src_ui_.panelregistry.html" class="tsd-kind-icon">Panel<wbr>Registry</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../classes/_api_src_ui_.tooltip.html" class="tsd-kind-icon">Tool<wbr>Tip</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_api_src_ui_.ui.html" class="tsd-kind-icon">UI</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_map_.entrygroupjson.html" class="tsd-kind-icon">Entry<wbr>GroupJSON</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_map_.legendjson.html" class="tsd-kind-icon">LegendJSON</a>
+						<a href="_api_src_ui_.jsonbasemap.html" class="tsd-kind-icon">JSONBasemap</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_map_.legendstructure.html" class="tsd-kind-icon">Legend<wbr>Structure</a>
+						<a href="_api_src_ui_.screenposition.html" class="tsd-kind-icon">Screen<wbr>Position</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_api_src_map_.legendstructure.html#json" class="tsd-kind-icon">JSON</a>
+								<a href="_api_src_ui_.screenposition.html#x" class="tsd-kind-icon">x</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-not-exported">
-								<a href="_api_src_map_.legendstructure.html#type" class="tsd-kind-icon">type</a>
+								<a href="_api_src_ui_.screenposition.html#y" class="tsd-kind-icon">y</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_api_src_map_.html#initobservables" class="tsd-kind-icon">init<wbr>Observables</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_api_src_ui_.anchorpoints.html" class="tsd-kind-icon">anchor<wbr>Points</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_api_src_map_.html#isconfigschema" class="tsd-kind-icon">is<wbr>Config<wbr>Schema</a>
+						<a href="../modules/_api_src_ui_.html#isbasemapobject" class="tsd-kind-icon">is<wbr>Basemap<wbr>Object</a>
 					</li>
 				</ul>
 			</nav>

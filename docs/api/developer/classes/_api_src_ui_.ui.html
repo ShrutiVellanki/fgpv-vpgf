@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PanelElem | r2v2</title>
+	<title>UI | r2v2</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_api_src_panel_.html">&quot;api/src/panel&quot;</a>
+					<a href="../modules/_api_src_ui_.html">&quot;api/src/ui&quot;</a>
 				</li>
 				<li>
-					<a href="_api_src_panel_.panelelem.html">PanelElem</a>
+					<a href="_api_src_ui_.ui.html">UI</a>
 				</li>
 			</ul>
-			<h1>Class PanelElem</h1>
+			<h1>Class UI</h1>
 		</div>
 	</div>
 </header>
@@ -71,31 +71,20 @@
 		<div class="col-8 col-content">
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>PanelElems can be set as the contents or controls of the Panel.</p>
-					</div>
-					<p><code>PanelElem</code> can be of type string, HTMLElement or JQuery<HTMLElement>. The can be constructed like so:</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">let</span> panelElem2 = <span class="hljs-keyword">new</span> RZ.PanelElem($(<span class="hljs-string">"&lt;div style='color: lightslategray'&gt;Contents:&lt;/div&gt;"</span>));
-<span class="hljs-keyword">let</span> panelElem3 = <span class="hljs-keyword">new</span> RZ.PanelElem($.parseHTML(<span class="hljs-string">'&lt;input type="text" value="Search..." id="coolInput"&gt;&lt;/input&gt;'</span>));
+					<dl class="tsd-comment-tags">
+						<dt>example</dt>
+						<dd><h4 id="using-an-anchor-point-to-remove-context-map">Using an anchor point to remove context map</h4>
+							<pre><code class="lang-js">RZ.mapInstances[<span class="hljs-number">0</span>].ui.anchors.CONTEXT_MAP.remove();
 </code></pre>
-					<p>Shortcuts can be used to create special <code>PanelElem</code>s inteded for use on panel controls. There are four shortcuts:</p>
-					<pre><code class="lang-js"><span class="hljs-keyword">let</span> panelElem1 = <span class="hljs-keyword">new</span> RZ.PanelElem(<span class="hljs-string">'Layers'</span>);   <span class="hljs-comment">//Title shortcut</span>
-<span class="hljs-keyword">let</span> panelElem2 = <span class="hljs-keyword">new</span> RZ.PanelElem(<span class="hljs-string">'T'</span>); <span class="hljs-comment">//toggle shortcut</span>
-<span class="hljs-keyword">let</span> panelElem3 = <span class="hljs-keyword">new</span> RZ.PanelElem(<span class="hljs-string">'x'</span>); <span class="hljs-comment">//close button shortcut</span>
-<span class="hljs-keyword">let</span> panelElem4 = <span class="hljs-keyword">new</span> RZ.PanelElem(<span class="hljs-string">'|'</span>); <span class="hljs-comment">//controls divider shortcut</span>
-</code></pre>
+						</dd>
+					</dl>
 				</div>
 			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">PanelElem</span>
-						<ul class="tsd-hierarchy">
-							<li>
-								<a href="_api_src_panel_.btn.html" class="tsd-signature-type">Btn</a>
-							</li>
-						</ul>
+						<span class="target">UI</span>
 					</li>
 				</ul>
 			</section>
@@ -106,28 +95,25 @@
 						<section class="tsd-index-section ">
 							<h3>Constructors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_api_src_panel_.panelelem.html#constructor" class="tsd-kind-icon">constructor</a></li>
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_api_src_panel_.panelelem.html#_document_fragment" class="tsd-kind-icon">_document_<wbr>fragment</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_api_src_panel_.panelelem.html#_element" class="tsd-kind-icon">_element</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_api_src_panel_.panelelem.html#_id" class="tsd-kind-icon">_id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#_basemaps" class="tsd-kind-icon">_basemaps</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#_mapi" class="tsd-kind-icon">_mapI</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#_panels" class="tsd-kind-icon">_panels</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#_tooltip" class="tsd-kind-icon">_tooltip</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Accessors</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_api_src_panel_.panelelem.html#element" class="tsd-kind-icon">element</a></li>
-								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_api_src_panel_.panelelem.html#id" class="tsd-kind-icon">id</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
-							<h3>Methods</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_api_src_panel_.panelelem.html#setelement" class="tsd-kind-icon">set<wbr>Element</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#anchors" class="tsd-kind-icon">anchors</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#basemaps" class="tsd-kind-icon">basemaps</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#panels" class="tsd-kind-icon">panels</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="_api_src_ui_.ui.html#tooltip" class="tsd-kind-icon">tooltip</a></li>
 							</ul>
 						</section>
 					</div>
@@ -139,64 +125,65 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Panel<wbr>Elem<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_api_src_panel_.panelelem.html" class="tsd-signature-type">PanelElem</a></li>
+						<li class="tsd-signature tsd-kind-icon">new UI<span class="tsd-signature-symbol">(</span>mapInstance<span class="tsd-signature-symbol">: </span><a href="_api_src_map_.map.html" class="tsd-signature-type">Map</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_api_src_ui_.ui.html" class="tsd-signature-type">UI</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L621">api/src/panel.ts:621</a></li>
+									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L535">api/src/ui.ts:535</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Constructs PanelElem object</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>constructor</dt>
-									<dd></dd>
-								</dl>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> element: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<h5>mapInstance: <a href="_api_src_map_.map.html" class="tsd-signature-type">Map</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_api_src_panel_.panelelem.html" class="tsd-signature-type">PanelElem</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_api_src_ui_.ui.html" class="tsd-signature-type">UI</a></h4>
 						</li>
 					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_document_fragment" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _document_<wbr>fragment</h3>
-					<div class="tsd-signature tsd-kind-icon">_document_<wbr>fragment<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DocumentFragment</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_basemaps" class="tsd-anchor"></a>
+					<h3>_basemaps</h3>
+					<div class="tsd-signature tsd-kind-icon">_basemaps<span class="tsd-signature-symbol">:</span> <a href="_api_src_ui_.basemapgroup.html" class="tsd-signature-type">BasemapGroup</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L620">api/src/panel.ts:620</a></li>
+							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L535">api/src/ui.ts:535</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="_element" class="tsd-anchor"></a>
-					<h3>_element</h3>
-					<div class="tsd-signature tsd-kind-icon">_element<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<a name="_mapi" class="tsd-anchor"></a>
+					<h3>_mapI</h3>
+					<div class="tsd-signature tsd-kind-icon">_mapI<span class="tsd-signature-symbol">:</span> <a href="_api_src_map_.map.html" class="tsd-signature-type">Map</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L621">api/src/panel.ts:621</a></li>
+							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L532">api/src/ui.ts:532</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="_id" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _id</h3>
-					<div class="tsd-signature tsd-kind-icon">_id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_panels" class="tsd-anchor"></a>
+					<h3>_panels</h3>
+					<div class="tsd-signature tsd-kind-icon">_panels<span class="tsd-signature-symbol">:</span> <a href="_api_src_ui_.panelregistry.html" class="tsd-signature-type">PanelRegistry</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L619">api/src/panel.ts:619</a></li>
+							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L533">api/src/ui.ts:533</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="_tooltip" class="tsd-anchor"></a>
+					<h3>_tooltip</h3>
+					<div class="tsd-signature tsd-kind-icon">_tooltip<span class="tsd-signature-symbol">:</span> <a href="_api_src_ui_.tooltip.html" class="tsd-signature-type">ToolTip</a><span class="tsd-signature-symbol"> =&nbsp;new ToolTip()</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L534">api/src/ui.ts:534</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -204,88 +191,70 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Accessors</h2>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="element" class="tsd-anchor"></a>
-					<h3>element</h3>
+					<a name="anchors" class="tsd-anchor"></a>
+					<h3>anchors</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> element<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> anchors<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_api_src_ui_.anchorpoints.html" class="tsd-signature-type">anchorPoints</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L712">api/src/panel.ts:712</a></li>
+									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L550">api/src/ui.ts:550</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets element of PanelElem object.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></h4>
-							<ul>
-								<li>this element that the PanelElem scopes.</li>
-							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_api_src_ui_.anchorpoints.html" class="tsd-signature-type">anchorPoints</a></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
-					<a name="id" class="tsd-anchor"></a>
-					<h3>id</h3>
+					<a name="basemaps" class="tsd-anchor"></a>
+					<h3>basemaps</h3>
 					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> id<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> basemaps<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_api_src_ui_.basemapgroup.html" class="tsd-signature-type">BasemapGroup</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L704">api/src/panel.ts:704</a></li>
+									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L556">api/src/ui.ts:556</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Gets the id of PanelElem object.</p>
-								</div>
-							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
-							<ul>
-								<li>the id of this PanelElem.</li>
-							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="_api_src_ui_.basemapgroup.html" class="tsd-signature-type">BasemapGroup</a></h4>
 						</li>
 					</ul>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="setelement" class="tsd-anchor"></a>
-					<h3>set<wbr>Element</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Element<span class="tsd-signature-symbol">(</span>element<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="panels" class="tsd-anchor"></a>
+					<h3>panels</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> panels<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_api_src_ui_.panelregistry.html" class="tsd-signature-type">PanelRegistry</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/panel.ts#L640">api/src/panel.ts:640</a></li>
+									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L542">api/src/ui.ts:542</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Helper method, sets PanelElem object</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>throws</dt>
-									<dd><p>{Exception} - cannot have multiple top level elements.</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> element: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">JQuery</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">HTMLElement</span><span class="tsd-signature-symbol">&gt;</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="_api_src_ui_.panelregistry.html" class="tsd-signature-type">PanelRegistry</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="tooltip" class="tsd-anchor"></a>
+					<h3>tooltip</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> tooltip<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_api_src_ui_.tooltip.html" class="tsd-signature-type">ToolTip</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ShrutiVellanki/fgpv-vpgf/blob/8149446b/api/src/ui.ts#L546">api/src/ui.ts:546</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="_api_src_ui_.tooltip.html" class="tsd-signature-type">ToolTip</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -312,10 +281,10 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_src_map_.html">"api/src/map"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_api_src_panel_.html">"api/src/panel"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_api_src_ui_.html">"api/src/ui"</a>
 					</li>
 					<li class="label tsd-is-external">
@@ -331,44 +300,71 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_api_src_panel_.btn.html" class="tsd-kind-icon">Btn</a>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_api_src_ui_.basepanel.html" class="tsd-kind-icon">Base<wbr>Panel</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_api_src_panel_.panel.html" class="tsd-kind-icon">Panel</a>
+						<a href="_api_src_ui_.basemap.html" class="tsd-kind-icon">Basemap</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_api_src_ui_.basemapgroup.html" class="tsd-kind-icon">Basemap<wbr>Group</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_api_src_ui_.panel.html" class="tsd-kind-icon">Panel</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="_api_src_ui_.panelregistry.html" class="tsd-kind-icon">Panel<wbr>Registry</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_api_src_ui_.tooltip.html" class="tsd-kind-icon">Tool<wbr>Tip</a>
 					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_api_src_panel_.panelelem.html" class="tsd-kind-icon">Panel<wbr>Elem</a>
+						<a href="_api_src_ui_.ui.html" class="tsd-kind-icon">UI</a>
 						<ul>
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_api_src_panel_.panelelem.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_api_src_panel_.panelelem.html#_document_fragment" class="tsd-kind-icon">_document_<wbr>fragment</a>
+								<a href="_api_src_ui_.ui.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_api_src_panel_.panelelem.html#_element" class="tsd-kind-icon">_element</a>
+								<a href="_api_src_ui_.ui.html#_basemaps" class="tsd-kind-icon">_basemaps</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_api_src_panel_.panelelem.html#_id" class="tsd-kind-icon">_id</a>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_api_src_ui_.ui.html#_mapi" class="tsd-kind-icon">_mapI</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_api_src_ui_.ui.html#_panels" class="tsd-kind-icon">_panels</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="_api_src_ui_.ui.html#_tooltip" class="tsd-kind-icon">_tooltip</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="_api_src_panel_.panelelem.html#element" class="tsd-kind-icon">element</a>
+								<a href="_api_src_ui_.ui.html#anchors" class="tsd-kind-icon">anchors</a>
 							</li>
 							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
-								<a href="_api_src_panel_.panelelem.html#id" class="tsd-kind-icon">id</a>
+								<a href="_api_src_ui_.ui.html#basemaps" class="tsd-kind-icon">basemaps</a>
 							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_api_src_panel_.panelelem.html#setelement" class="tsd-kind-icon">set<wbr>Element</a>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_api_src_ui_.ui.html#panels" class="tsd-kind-icon">panels</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="_api_src_ui_.ui.html#tooltip" class="tsd-kind-icon">tooltip</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_api_src_panel_.panelpositions.html" class="tsd-kind-icon">Panel<wbr>Positions</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../interfaces/_api_src_ui_.jsonbasemap.html" class="tsd-kind-icon">JSONBasemap</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../interfaces/_api_src_ui_.screenposition.html" class="tsd-kind-icon">Screen<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../interfaces/_api_src_ui_.anchorpoints.html" class="tsd-kind-icon">anchor<wbr>Points</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="../modules/_api_src_ui_.html#isbasemapobject" class="tsd-kind-icon">is<wbr>Basemap<wbr>Object</a>
 					</li>
 				</ul>
 			</nav>
