@@ -18,7 +18,7 @@ angular
     .module('app.ui')
     .directive('rvDragula', rvDragula);
 
-function rvDragula($compile, dragulaService, keyNames) {
+function rvDragula($compile, dragulaService, keyNames, events) {
     const directive = {
         restrict: 'A',
         link: link,
@@ -33,29 +33,53 @@ function rvDragula($compile, dragulaService, keyNames) {
     function link(scope, el, attr) { // , ctrl) {
         const dragulaScope = scope;
 
-        // set container and the mirror container to be the same element as we need
-        const dragulaOptions = {
-            containers: [el[0]],
-            mirrorContainer: el[0],
-            rvDragCancel: () => { },
-            rvDragDrop: () => { },
-            rvDragStart: () => { },
-            rvDragDropModel: () => { }
-        };
+        // recreate dragular instance when projection is changed
+        events.$on(events.rvProjectiontChanged, () => {
+            createDragular();
+        });
 
-        // extend default options with extras from the the parent scope
-        angular.extend(dragulaOptions, dragulaScope.self[attr.rvDragulaOptions]);
-        dragulaService.options(dragulaScope, attr.rvDragula, dragulaOptions);
+        // recreate dragular instance when language is changed
+        events.$on(events.rvLanguageChanged, () => {
+            createDragular();
+        });
 
-        // compile original dragula directive in some html without actually inserting it into the page
-        $compile(`<div dragula="'${attr.rvDragula}'" dragula-model="${attr.rvDragulaModel}"></div>`)(
-            dragulaScope);
+        createDragular();
 
-        // get dragula instance of dragula
-        const drake = dragulaService.find(dragulaScope, attr.rvDragula)
-            .drake;
+        /**
+         * Create dragular instance
+         *
+         * @function createDragular
+         */
+        function createDragular() {
+            // destroy previous dragular instance
+            if (dragulaService.find(dragulaScope, attr.rvDragula)) {
+                dragulaService.destroy(dragulaScope, attr.rvDragula);
+            }
 
-        keyboardDragula(el, scope, drake, dragulaOptions);
+            // set container and the mirror container to be the same element as we need
+            const dragulaOptions = {
+                containers: [el[0]],
+                mirrorContainer: el[0],
+                rvDragCancel: () => { },
+                rvDragDrop: () => { },
+                rvDragStart: () => { },
+                rvDragDropModel: () => { }
+            };
+
+            // extend default options with extras from the the parent scope
+            angular.extend(dragulaOptions, dragulaScope.self[attr.rvDragulaOptions]);
+            dragulaService.options(dragulaScope, attr.rvDragula, dragulaOptions);
+
+            // compile original dragula directive in some html without actually inserting it into the page
+            $compile(`<div dragula="'${attr.rvDragula}'" dragula-model="${attr.rvDragulaModel}"></div>`)(
+                dragulaScope);
+
+            // get dragula instance of dragula
+            const drake = dragulaService.find(dragulaScope, attr.rvDragula)
+                .drake;
+
+            keyboardDragula(el, scope, drake, dragulaOptions);
+        }
     }
 
     /**
@@ -94,7 +118,7 @@ function rvDragula($compile, dragulaService, keyNames) {
          * @param  {Object} event event object
          */
         function focusOutHandler(event) {
-            RV.logger.log('dragulaDirective', 'event', event,
+            console.log('dragulaDirective', 'event', event,
                 `isReordering ${isReordering} isDragging ${isDragging}`);
             if (isDragging && !isReordering) {
                 dropElement(event, event.target);
@@ -106,7 +130,7 @@ function rvDragula($compile, dragulaService, keyNames) {
          * @param  {Object} event event object
          */
         function keyDownHandler(event) {
-            RV.logger.log('dragulaDirective', event.keyCode);
+            console.log('dragulaDirective', event.keyCode);
             const target = angular.element(event.target);
 
             // if the target cannot be moved, exit

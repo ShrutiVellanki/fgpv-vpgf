@@ -1,7 +1,7 @@
 import Map from 'api/map';
 import * as GEO from 'api/geometry';
 import { ConfigLayer, SimpleLayer } from 'api/layers';
-import { Subject } from 'rxjs/Rx';
+import { Subject } from 'rxjs';
 import * as $ from "jquery";
 
 const mapInstances: Array<Map> = [];
@@ -11,6 +11,9 @@ class RZ {
      * Emits an instance of the map class whenever a new map is added to the viewer.
      * */
     mapAdded: Subject<Map> = new Subject();
+
+    // Google tag manager dataLayer
+    gtmDL: Array<any> = (<any>window).dataLayer;
 
     /** Loads and executes a javascript file from the provided url. */
     loadExtension(url: string): void {
