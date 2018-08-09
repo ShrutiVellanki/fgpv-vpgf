@@ -861,7 +861,7 @@ function ConfigObjectFactory(Geo, gapiService, common, events, $rootScope) {
             super(source);
 
             this._level = source.level;
-            this._desc = source.desc;
+            this._desc = source.name;
             this._id = source.id;
             this._allStyles = source.allStyles;
             this._styleToURL = source.styleToURL;
