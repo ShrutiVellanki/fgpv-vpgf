@@ -859,9 +859,9 @@ function ConfigObjectFactory(Geo, gapiService, common, events, $rootScope) {
     class WMSLayerEntryNode extends LayerEntryNode {
         constructor (source) {
             super(source);
-            this._name = source.desc;
+            console.log(source);
             this._level = source.level;
-            this._desc = source.desc;
+            this._desc = source.index +". "+source.desc;
             this._id = source.id;
             this._allStyles = source.allStyles;
             this._styleToURL = source.styleToURL;
