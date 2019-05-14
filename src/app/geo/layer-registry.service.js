@@ -1,4 +1,7 @@
-import { ConfigLayer, SimpleLayer } from 'api/layers';
+import {
+    ConfigLayer,
+    SimpleLayer
+} from 'api/layers';
 
 const THROTTLE_COUNT = 2;
 const THROTTLE_TIMEOUT = 3000;
@@ -187,7 +190,7 @@ function layerRegistryFactory(
 
         layerRecordPromise
             .then(layerRecord => (ref.refreshAttributes[layerRecord.layerId] = _attribsInvalidation(layerRecord)))
-            .catch(() => { }); // if layer record creation fails, the error will be handled elsewhere
+            .catch(() => {}); // if layer record creation fails, the error will be handled elsewhere
 
         /**
          * @function _attribsInvalidation
@@ -263,7 +266,7 @@ function layerRegistryFactory(
 
         // generate the layer record again
         // if layer record creation fails, the error will be handled elsewhere;
-        _startGeneratingLayerRecord(layerBlueprint, true).catch(() => { });
+        _startGeneratingLayerRecord(layerBlueprint, true).catch(() => {});
     }
 
     /**
@@ -327,7 +330,7 @@ function layerRegistryFactory(
                 ref.loadingQueue.push(layerRecord);
                 _loadNextLayerRecord();
             })
-            .catch(error => { });
+            .catch(error => {});
     }
 
     /**
@@ -546,7 +549,9 @@ function layerRegistryFactory(
         shellService.setLoadingFlag({
             id: config.id,
             messageDelay: config.expectedResponseTime,
-            message: $translate.instant('toc.layer.longload.message', { name: `"${config.name}"` }),
+            message: $translate.instant('toc.layer.longload.message', {
+                name: `"${config.name}"`
+            }),
             action: $translate.instant('toc.layer.longload.hide')
         });
         /* .then(response => {
@@ -577,12 +582,12 @@ function layerRegistryFactory(
         // TODO:? user-added layers are not added to `configService.getSync.map.layers`; they will be always added at the top of the stack for structured legend, so this is not an immediate concern;
         // if auto legend, take the legend block order from the legend panel
         // TODO: what is adding layer into the `configService.getSync.map.layers` ???
-        const orderedLayerRecords = (configService.getSync.map.legend.type === ConfigObject.TYPES.legend.AUTOPOPULATE
-            ? layerRecordIDsInLegend
-            : configService.getSync.map.layers
+        const orderedLayerRecords = (configService.getSync.map.legend.type === ConfigObject.TYPES.legend.AUTOPOPULATE ?
+                layerRecordIDsInLegend :
+                configService.getSync.map.layers
                 .map(layer => layer.id)
                 .filter(id => layerRecordIDsInLegend.indexOf(id) !== -1)
-        )
+            )
             .map(getLayerRecord)
             .filter(lr => lr); // get appropriate layer records
 
@@ -593,10 +598,10 @@ function layerRegistryFactory(
         mapBody.graphicsLayerIds.forEach(id => {
             if (service.replacementIds[id] === undefined) {
                 // if current graphicLayerId does not have a match yet
-                if (!orderedLayerRecordsIds.includes(id)
-                    && id !== 'graphicsLayer1'
-                    && id !== 'graphicsLayer2'
-                    && id !== 'rv_hilight') {
+                if (!orderedLayerRecordsIds.includes(id) &&
+                    id !== 'graphicsLayer1' &&
+                    id !== 'graphicsLayer2' &&
+                    id !== 'rv_hilight') {
                     // find a match for the case where the same ID is not stored in mapBody.graphicLayerIds and orderedLayerRecords
                     const matches = Object.keys(service.replacementIds).map(key => service.replacementIds[key]);
                     orderedLayerRecordsIds.forEach(orderedId => {
@@ -687,19 +692,25 @@ function layerRegistryFactory(
      * @private
      */
     function syncApiElementOrder() {
-        const legendEntries = configService.getSync.map.legendBlocks.entries.filter(entry => !entry.hidden);
-        const legendElements = mapApi.ui.configLegend.children;
-        let reorderedElements = [];
-        legendEntries.forEach((entry, index) => {
-            entry = entry.collapsed ? entry.entries[0] : entry;
-            if (entry !== legendElements[index]._legendBlock) {
-                const element = legendElements.find(legendElement => entry === legendElement._legendBlock) || reorderedElements.find(legendElement => entry === legendElement._legendBlock);
-                if (element) {
-                    reorderedElements.push(legendElements[index]);
-                    legendElements[index] = element;
+        if (mapApi === null) {
+            events.$on(events.rvApiMapAdded, (_, mApi) => {
+                syncApiElementOrder();
+            });
+        } else {
+            const legendEntries = configService.getSync.map.legendBlocks.entries.filter(entry => !entry.hidden);
+            const legendElements = mapApi.ui.configLegend.children;
+            let reorderedElements = [];
+            legendEntries.forEach((entry, index) => {
+                entry = entry.collapsed ? entry.entries[0] : entry;
+                if (entry !== legendElements[index]._legendBlock) {
+                    const element = legendElements.find(legendElement => entry === legendElement._legendBlock) || reorderedElements.find(legendElement => entry === legendElement._legendBlock);
+                    if (element) {
+                        reorderedElements.push(legendElements[index]);
+                        legendElements[index] = element;
+                    }
                 }
-            }
-        });
+            });
+        }
     }
     /**
      * // TODO: make a wrapper for the bounding box layer
@@ -1111,7 +1122,7 @@ function layerRegistryFactory(
      * @param {Object} params event parameters from geoApi event
      */
     function _onLayerFilterChange(params) {
-       events.$broadcast(events.rvFilterChanged, params);
+        events.$broadcast(events.rvFilterChanged, params);
     }
 
     /**
