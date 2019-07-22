@@ -10,38 +10,12 @@
       ]
     },
     "sideMenu": {
-      "items": [
-        [
-          "layers",
-          "basemap"
-        ],
-        [
-          "fullscreen",
-          "export",
-          "share",
-          "touch",
-          "help",
-          "about"
-        ],
-        [
-          "language"
-        ],
-        [
-          "plugins"
-        ]
-      ],
       "logo": true
-    },
-    "about": {
-      "content": "-- placeholder --"
-    },
-    "help": {
-      "folderName": "default"
     },
     "legend": {
       "isOpen": {
-        "large": false,
-        "medium": false,
+        "large": true,
+        "medium": true,
         "small": false
       }
     }
@@ -49,8 +23,8 @@
   "version": "2.0",
   "language": "en",
   "services": {
-    "proxyUrl": "http://167.40.64.74/wmsproxy/ws/wmsproxy/executeFromProxy",
-    "exportMapUrl": "http://section917.cloudapp.net/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
+    "proxyUrl": "https://167.40.64.74/wmsproxy/ws/wmsproxy/executeFromProxy",
+    "exportMapUrl": "https://section917.cloudapp.net/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task",
     "export": {
       "title": {
         "value": "Title"
@@ -64,11 +38,11 @@
     },
     "search": {
       "serviceUrls": {
-        "geoNames": "http://geogratis.gc.ca/services/geoname/en/geonames.json",
-        "geoLocation": "http://geogratis.gc.ca/services/geolocation/en/locate?q=",
-        "geoSuggest": "http://geogratis.gc.ca/services/geolocation/en/suggest?q=",
-        "provinces": "http://geogratis.gc.ca/services/geoname/en/codes/province.json",
-        "types": "http://geogratis.gc.ca/services/geoname/en/codes/concise.json"
+        "geoNames": "https://geogratis.gc.ca/services/geoname/en/geonames.json",
+        "geoLocation": "https://geogratis.gc.ca/services/geolocation/en/locate?q=",
+        "geoSuggest": "https://geogratis.gc.ca/services/geolocation/en/suggest?q=",
+        "provinces": "https://geogratis.gc.ca/services/geoname/en/codes/province.json",
+        "types": "https://geogratis.gc.ca/services/geoname/en/codes/concise.json"
       }
     }
   },
@@ -77,13 +51,13 @@
     "components": {
       "geoSearch": {
         "enabled": true,
-        "showGraphic": false,
-        "showInfo": false
+        "showGraphic": true,
+        "showInfo": true
       },
       "mouseInfo": {
         "enabled": true,
         "spatialReference": {
-          "wkid": 4326
+          "wkid": 102100
         }
       },
       "northArrow": {
@@ -101,22 +75,54 @@
       }
     },
     "legend": {
-      "type": "autopopulate"
+      "type": "structured",
+      "root": {
+        "name": "root",
+        "children": [{
+            "layerId": "powerplant-nuclear"
+          },
+          {
+            "layerId": "powerplant-wind"
+          },
+          {
+            "layerId": "powerplant-solar"
+          }
+        ]
+      }
     },
-    "layers": [
+    "layers": [{
+        "id": "powerplant-nuclear",
+        "name": "Power Plants, nuclear",
+        "layerType": "esriDynamic",
+        "metadataUrl": "http://donnees-data.intranet.ec.gc.ca:80/geonetwork/srv/eng/xml.metadata.get?uuid=917b8854-64a5-41d6-ad7f-d0a3c0c3cb29",
+        "layerEntries": [{
+          "index": 22,
+          "table": {
+            "title": "A custom title"
+          }
+        }],
+        "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer"
+      },
       {
-        "id": "powerplant100mw-electric",
-        "name": "Electric Transmission Line",
-        "layerType": "esriFeature",
-        "state": {
-          "visibility": false,
-          "boundingBox": false
-        },
-        "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer/1"
+        "id": "powerplant-solar",
+        "name": "Power Plants, solar",
+        "layerType": "esriDynamic",
+        "layerEntries": [{
+          "index": 34
+        }],
+        "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer"
+      },
+      {
+        "id": "powerplant-wind",
+        "name": "Power Plants, wind",
+        "layerType": "esriDynamic",
+        "layerEntries": [{
+          "index": 27
+        }],
+        "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/NACEI/energy_infrastructure_of_north_america_en/MapServer"
       }
     ],
-    "extentSets": [
-      {
+    "extentSets": [{
         "id": "EXT_NRCAN_Lambert_3978",
         "default": {
           "xmax": 3549492,
@@ -142,11 +148,9 @@
         }
       }
     ],
-    "lodSets": [
-      {
+    "lodSets": [{
         "id": "LOD_NRCAN_Lambert_3978",
-        "lods": [
-          {
+        "lods": [{
             "level": 0,
             "resolution": 38364.660062653464,
             "scale": 145000000
@@ -240,8 +244,7 @@
       },
       {
         "id": "LOD_ESRI_World_AuxMerc_3857",
-        "lods": [
-          {
+        "lods": [{
             "level": 0,
             "resolution": 19567.87924099992,
             "scale": 73957190.948944
@@ -349,8 +352,7 @@
         ]
       }
     ],
-    "tileSchemas": [
-      {
+    "tileSchemas": [{
         "id": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978",
         "name": "Lambert Maps",
         "extentSetId": "EXT_NRCAN_Lambert_3978",
@@ -364,19 +366,16 @@
         "lodSetId": "LOD_ESRI_World_AuxMerc_3857"
       }
     ],
-    "baseMaps": [
-      {
+    "baseMaps": [{
         "id": "baseNrCan",
         "name": "Canada Base Map - Transportation (CBMT)",
         "description": "The Canada Base Map - Transportation (CBMT) web mapping services of the Earth Sciences Sector at Natural Resources Canada, are intended primarily for online mapping application users and developers.",
         "altText": "altText - The Canada Base Map - Transportation (CBMT)",
-        "layers": [
-          {
-            "id": "CBMT",
-            "layerType": "esriFeature",
-            "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT3978/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "CBMT",
+          "layerType": "esriFeature",
+          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT3978/MapServer"
+        }],
         "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
       },
       {
@@ -384,13 +383,11 @@
         "name": "Canada Base Map - Simple",
         "description": "Canada Base Map - Simple",
         "altText": "altText - Canada base map - Simple",
-        "layers": [
-          {
-            "id": "SMR",
-            "layerType": "esriFeature",
-            "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/Simple/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "SMR",
+          "layerType": "esriFeature",
+          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/Simple/MapServer"
+        }],
         "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
       },
       {
@@ -398,13 +395,11 @@
         "name": "Canada Base Map - Elevation (CBME)",
         "description": "The Canada Base Map - Elevation (CBME) web mapping services of the Earth Sciences Sector at Natural Resources Canada, is intended primarily for online mapping application users and developers.",
         "altText": "altText - Canada Base Map - Elevation (CBME)",
-        "layers": [
-          {
-            "id": "CBME_CBCE_HS_RO_3978",
-            "layerType": "esriFeature",
-            "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBME_CBCE_HS_RO_3978/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "CBME_CBCE_HS_RO_3978",
+          "layerType": "esriFeature",
+          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBME_CBCE_HS_RO_3978/MapServer"
+        }],
         "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
       },
       {
@@ -412,13 +407,11 @@
         "name": "Canada Base Map - Transportation (CBMT)",
         "description": " The Canada Base Map - Transportation (CBMT) web mapping services of the Earth Sciences Sector at Natural Resources Canada, are intended primarily for online mapping application users and developers.",
         "altText": "altText - Canada Base Map - Transportation (CBMT)",
-        "layers": [
-          {
-            "id": "CBMT_CBCT_GEOM_3978",
-            "layerType": "esriFeature",
-            "url": "http://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT_CBCT_GEOM_3978/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "CBMT_CBCT_GEOM_3978",
+          "layerType": "esriFeature",
+          "url": "https://geoappext.nrcan.gc.ca/arcgis/rest/services/BaseMaps/CBMT_CBCT_GEOM_3978/MapServer"
+        }],
         "tileSchemaId": "EXT_NRCAN_Lambert_3978#LOD_NRCAN_Lambert_3978"
       },
       {
@@ -426,13 +419,11 @@
         "name": "World Imagery",
         "description": "World Imagery provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.",
         "altText": "altText - World Imagery",
-        "layers": [
-          {
-            "id": "World_Imagery",
-            "layerType": "esriFeature",
-            "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "World_Imagery",
+          "layerType": "esriFeature",
+          "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer"
+        }],
         "tileSchemaId": "EXT_ESRI_World_AuxMerc_3857#LOD_ESRI_World_AuxMerc_3857"
       },
       {
@@ -440,13 +431,11 @@
         "name": "World Physical Map",
         "description": "This map presents the Natural Earth physical map at 1.24km per pixel for the world and 500m for the coterminous United States.",
         "altText": "altText - World Physical Map",
-        "layers": [
-          {
-            "id": "World_Physical_Map",
-            "layerType": "esriFeature",
-            "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Physical_Map/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "World_Physical_Map",
+          "layerType": "esriFeature",
+          "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Physical_Map/MapServer"
+        }],
         "tileSchemaId": "EXT_ESRI_World_AuxMerc_3857#LOD_ESRI_World_AuxMerc_3857"
       },
       {
@@ -454,13 +443,11 @@
         "name": "World Shaded Relief",
         "description": "This map portrays surface elevation as shaded relief. This map is used as a basemap layer to add shaded relief to other GIS maps, such as the ArcGIS Online World Street Map.",
         "altText": "altText - World Shaded Relief",
-        "layers": [
-          {
-            "id": "World_Shaded_Relief",
-            "layerType": "esriFeature",
-            "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "World_Shaded_Relief",
+          "layerType": "esriFeature",
+          "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer"
+        }],
         "tileSchemaId": "EXT_ESRI_World_AuxMerc_3857#LOD_ESRI_World_AuxMerc_3857"
       },
       {
@@ -468,13 +455,11 @@
         "name": "World Street Map",
         "description": "This worldwide street map presents highway-level data for the world.",
         "altText": "altText - ESWorld Street Map",
-        "layers": [
-          {
-            "id": "World_Street_Map",
-            "layerType": "esriFeature",
-            "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "World_Street_Map",
+          "layerType": "esriFeature",
+          "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer"
+        }],
         "tileSchemaId": "EXT_ESRI_World_AuxMerc_3857#LOD_ESRI_World_AuxMerc_3857"
       },
       {
@@ -482,13 +467,11 @@
         "name": "World Terrain Base",
         "description": "This map is designed to be used as a base map by GIS professionals to overlay other thematic layers such as demographics or land cover.",
         "altText": "altText - World Terrain Base",
-        "layers": [
-          {
-            "id": "World_Terrain_Base",
-            "layerType": "esriFeature",
-            "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "World_Terrain_Base",
+          "layerType": "esriFeature",
+          "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer"
+        }],
         "tileSchemaId": "EXT_ESRI_World_AuxMerc_3857#LOD_ESRI_World_AuxMerc_3857"
       },
       {
@@ -496,15 +479,55 @@
         "name": "World Topographic Map",
         "description": "This map is designed to be used as a basemap by GIS professionals and as a reference map by anyone.",
         "altText": "altText - World Topographic Map",
-        "layers": [
-          {
-            "id": "World_Topo_Map",
-            "layerType": "esriFeature",
-            "url": "http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer"
-          }
-        ],
+        "layers": [{
+          "id": "World_Topo_Map",
+          "layerType": "esriFeature",
+          "url": "https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer"
+        }],
         "tileSchemaId": "EXT_ESRI_World_AuxMerc_3857#LOD_ESRI_World_AuxMerc_3857"
       }
     ]
+  },
+  "plugins": {
+    "areasOfInterest": {
+      "areas": [{
+          "title-en-CA": "Reservoir Manicougan, Quebec, Canada",
+          "title-fr-CA": "Réservoir Manicougan, Québec, Canada",
+          "xmin": 1750000,
+          "xmax": 1840000,
+          "ymax": 682193,
+          "ymin": 583440,
+          "wkid": 3978
+        },
+        {
+          "title-en-CA": "Gulf of St Lawrence",
+          "title-fr-CA": "Golfe du Saint-Laurent",
+          "xmin": 2050000,
+          "xmax": 2240000,
+          "ymax": 682193,
+          "ymin": 583440,
+          "wkid": 3978
+        },
+        {
+          "title-en-CA": "Lake Grandmesnil and surrounding lakes",
+          "title-fr-CA": "Lac Grandmesnil et les lacs environnants",
+          "xmin": 1800000,
+          "xmax": 1840000,
+          "ymax": 682193,
+          "ymin": 583440,
+          "wkid": 3978
+        },
+        {
+          "title-en-CA": "Lake Piraube and surrounding lakes",
+          "title-fr-CA": "Lac Piraube et lacs environnants",
+          "xmin": 1550000,
+          "xmax": 1740000,
+          "ymax": 632193,
+          "ymin": 333440,
+          "wkid": 3978
+        }
+      ],
+      "noPicture": true
+    }
   }
 }

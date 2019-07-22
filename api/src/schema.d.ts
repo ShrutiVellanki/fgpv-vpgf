@@ -216,6 +216,12 @@ export interface FgpvConfigSchema {
     [k: string]: any;
   };
   /**
+   * A set of config snippets correponding to the plugins loaded onto the viewer
+   */
+  plugins?: {
+    [k: string]: any;
+  };
+  /**
    * A set of service endpoints used by the viewer
    */
   services?: {
